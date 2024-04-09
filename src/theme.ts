@@ -2,26 +2,42 @@
 
 import { Inter } from "next/font/google";
 
-import { createTheme } from "@mui/material/styles";
+import { ThemeOptions, createTheme } from "@mui/material/styles";
 
 const font = Inter({
   subsets: ["latin"],
   display: "swap",
 });
 
-export const lightTheme = createTheme({
+const baseTheme = {
   typography: {
     fontFamily: font.style.fontFamily,
   },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        size: "large",
+        color: "inherit",
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        size: "large",
+        color: "inherit",
+      },
+    },
+  },
+} as ThemeOptions;
+
+export const lightTheme = createTheme({
+  ...baseTheme,
   palette: {
     mode: "light",
   },
 });
 
 export const darkTheme = createTheme({
-  typography: {
-    fontFamily: font.style.fontFamily,
-  },
+  ...baseTheme,
   palette: {
     mode: "dark",
   },

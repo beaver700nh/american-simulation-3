@@ -2,8 +2,8 @@
 
 import { useContext } from "react";
 
-import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import { LightMode, DarkMode, Abc } from "@mui/icons-material";
+import { AppBar, Button, IconButton, Toolbar, useTheme } from "@mui/material";
+import { LightMode, DarkMode, AccountCircle } from "@mui/icons-material";
 
 import { ColorModeContext } from "@/contexts/color-mode";
 
@@ -16,24 +16,25 @@ export default function GlobalNav() {
       position="sticky"
     >
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
+        <Button
+          variant="text"
+          sx={{ marginLeft: "-12px" }}
         >
-          <Abc />
+          American Simulation
+        </Button>
+        <IconButton
+          sx={{ marginLeft: "auto" }}
+          onClick={colorMode.toggle}
+        >
+          {theme.palette.mode === "light" ?
+          <LightMode /> :
+          <DarkMode />}
         </IconButton>
         <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          onClick={colorMode.toggle}
-          >
-            {theme.palette.mode === "light" ?
-            <LightMode /> :
-            <DarkMode />}
-          </IconButton>
-        <span>Account</span>
+          edge="end"
+        >
+          <AccountCircle />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
