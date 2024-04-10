@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { AppBar, Button, IconButton, Toolbar, useTheme } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
 import { LightMode, DarkMode, AccountCircle } from "@mui/icons-material";
 
 import { ColorModeContext } from "@/contexts/color-mode";
@@ -16,14 +16,11 @@ export default function GlobalNav() {
       position="sticky"
     >
       <Toolbar>
-        <Button
-          variant="text"
-          sx={{ marginLeft: "-12px" }}
-        >
+        <Typography>
           American Simulation
-        </Button>
+        </Typography>
         <IconButton
-          sx={{ marginLeft: "auto" }}
+          style={{ marginLeft: "auto" }}
           onClick={colorMode.toggle}
         >
           {theme.palette.mode === "light" ?

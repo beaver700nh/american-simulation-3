@@ -14,6 +14,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "The Sim",
   description: "Mr. White's US I American Sim",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -23,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.webmanifest" />
+      </head>
       <body className={`${inter.className} fixed inset-0 flex flex-col`}>
         <AppRouterCacheProvider>
           <ThemeManager>

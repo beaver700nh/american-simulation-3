@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "American Simulation",
+  "short_name": "The Sim",
+  "description": "A game simulating the early United States from the colonial era into the Industrial Revolution, based on a MS Excel program written by Mr. White",
+  "version": "1.0.0",
+  "author": "Minh Le",
+  "display": "standalone",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
