@@ -16,11 +16,12 @@ export default function GlobalNav() {
       position="sticky"
     >
       <Toolbar>
-        <Typography>
+        <Typography
+          className="grow"
+        >
           American Simulation
         </Typography>
         <IconButton
-          style={{ marginLeft: "auto" }}
           onClick={colorMode.toggle}
         >
           {theme.palette.mode === "light" ?

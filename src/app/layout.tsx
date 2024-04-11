@@ -25,16 +25,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+    >
       <head>
-        <link rel="manifest" href="/manifest.webmanifest" />
+        <link
+          rel="manifest"
+          href="/manifest.webmanifest"
+        />
       </head>
-      <body className={`${inter.className} fixed inset-0 flex flex-col`}>
+      <body
+        className={`fixed inset-0 flex flex-col ${inter.className}`}
+      >
         <AppRouterCacheProvider>
           <ThemeManager>
             <CssBaseline />
             <GlobalNav />
-            <main>
+            <main
+              className="flex flex-col grow"
+            >
               {children}
             </main>
           </ThemeManager>
