@@ -17,7 +17,6 @@ const baseTheme = {
     MuiButton: {
       defaultProps: {
         size: "large",
-        color: "inherit",
       },
     },
     MuiIconButton: {

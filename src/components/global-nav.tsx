@@ -23,6 +23,7 @@ export default function GlobalNav() {
         </Typography>
         <IconButton
           onClick={colorMode.toggle}
+          title="Toggle Theme"
         >
           {theme.palette.mode === "light" ?
           <LightMode /> :
@@ -30,6 +31,7 @@ export default function GlobalNav() {
         </IconButton>
         <IconButton
           edge="end"
+          title="Account Info"
         >
           <AccountCircle />
         </IconButton>

@@ -28,12 +28,6 @@ export default function RootLayout({
     <html
       lang="en"
     >
-      <head>
-        <link
-          rel="manifest"
-          href="/manifest.webmanifest"
-        />
-      </head>
       <body
         className={`fixed inset-0 flex flex-col ${inter.className}`}
       >
