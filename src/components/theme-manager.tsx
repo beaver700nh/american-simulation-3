@@ -1,11 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 
 import { PaletteMode, ThemeProvider } from "@mui/material";
 
 import { darkTheme, lightTheme } from "@/theme";
-import { ColorModeContext } from "@/contexts/color-mode";
+
+type ColorModeContext = [
+  mode: PaletteMode,
+  setMode: Dispatch<SetStateAction<PaletteMode>>,
+];
+
+export const ColorModeContext = createContext<ColorModeContext | null>(null);
 
 export default function ThemeManager({
   children,
@@ -13,15 +19,26 @@ export default function ThemeManager({
   children: React.ReactNode;
 }>) {
   const [mode, setMode] = useState<PaletteMode>("light");
-  const setColorMode = useMemo(() => ({
-    toggle: () => setMode(prev => (prev === "light" ? "dark" : "light")),
-  }), []);
 
   return (
-    <ColorModeContext.Provider value={setColorMode}>
-    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
+    <ColorModeContext.Provider
+      value={[ mode, setMode ]}
+    >
+    <ThemeProvider
+      theme={mode === "light" ? lightTheme : darkTheme}
+    >
       {children}
     </ThemeProvider>
     </ColorModeContext.Provider>
   );
+}
+
+export function useColorMode() {
+  const context = useContext(ColorModeContext);
+
+  if (!context) {
+    throw new Error("useColorMode must be used within a ThemeManager");
+  }
+
+  return context;
 }

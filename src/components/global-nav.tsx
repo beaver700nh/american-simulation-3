@@ -1,15 +1,19 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
 import { LightMode, DarkMode, AccountCircle } from "@mui/icons-material";
 
-import { ColorModeContext } from "@/contexts/color-mode";
+import { useColorMode } from "@/components/theme-manager";
 
 export default function GlobalNav() {
   const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const [colorMode, setColorMode] = useColorMode();
+
+  const toggleColorMode = useMemo(() => () => {
+    setColorMode(mode => mode === "light" ? "dark" : "light");
+  }, [setColorMode]);
 
   return (
     <AppBar
@@ -22,7 +26,7 @@ export default function GlobalNav() {
           American Simulation
         </Typography>
         <IconButton
-          onClick={colorMode.toggle}
+          onClick={toggleColorMode}
           title="Toggle Theme"
         >
           {theme.palette.mode === "light" ?
