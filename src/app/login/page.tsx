@@ -10,13 +10,14 @@ export default function Login() {
 
   return (
     <Box
-      className="grow flex"
+      className="grow flex relative"
     >
       <Image
         className="object-cover -z-10 opacity-50 blur-sm"
         src="/assets/paper-version.jpg"
         alt=""
         fill
+        priority
       />
       <Grid
         sx={{ width: "calc(25lvw + 25lvh)", backgroundColor: alpha(theme.palette.background.default, 0.75) }}
@@ -35,6 +36,7 @@ export default function Login() {
               className="object-contain"
               src="/logo.png"
               alt=""
+              sizes="3rem"
               fill
             />
           </Icon>
@@ -56,6 +58,7 @@ export default function Login() {
             label="Settlement"
             name="username"
             select
+            value={1}
           >
             <MenuItem value={1}>Test Item A</MenuItem>
             <MenuItem value={2}>Test Item B</MenuItem>
