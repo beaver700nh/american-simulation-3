@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
+    "@million/lint": "^0.0.73",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/material-nextjs": "^5.15.11",
