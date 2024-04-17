@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar } from "@mui/material";
 
 import { camelToKebab, camelToTitle } from "@/app/lib/case-convert";
@@ -26,17 +28,19 @@ export default function Sidebar() {
             .entries(tabs)
             .sort(([, a], [, b]) => a.index - b.index)
             .map(([name, data]) =>
-          <ListItemButton
+          <Link
             key={name}
             href={`/game/tabs/${camelToKebab(name)}`}
           >
-            <ListItemIcon>
-              <data.Icon />
-            </ListItemIcon>
-            <ListItemText>
-              {camelToTitle(name)}
-            </ListItemText>
-          </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <data.Icon />
+              </ListItemIcon>
+              <ListItemText
+                primary={camelToTitle(name)}
+              />
+            </ListItemButton>
+          </Link>
           )}
         </List>
       </Box>
