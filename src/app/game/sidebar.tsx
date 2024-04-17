@@ -22,22 +22,46 @@ export default function Sidebar() {
         className="overflow-auto"
       >
         <List>
-          {Object
-            .entries(tabs)
-            .sort(([, a], [, b]) => a.index - b.index)
-            .map(([name, data]) =>
           <ListItemButton
-            key={name}
-            href={`/game/tabs/${camelToKebab(name)}`}
+            href="/game/tabs/main-menu"
           >
             <ListItemIcon>
-              <data.Icon />
+              {/* <tabs.MainMenu.Icon /> */}
             </ListItemIcon>
             <ListItemText>
-              {camelToTitle(name)}
+              Main Menu
             </ListItemText>
           </ListItemButton>
-          )}
+          <ListItemButton
+            href="/game/tabs/settlement-map"
+          >
+            <ListItemIcon>
+              {/* <tabs.SettlementMap.Icon /> */}
+            </ListItemIcon>
+            <ListItemText>
+              Settlement Map
+            </ListItemText>
+          </ListItemButton>
+          <ListItemButton
+            href="/game/tabs/settlement-sheet"
+          >
+            <ListItemIcon>
+              {/* <tabs.SettlementSheet.Icon /> */}
+            </ListItemIcon>
+            <ListItemText>
+              Settlement Sheet
+            </ListItemText>
+          </ListItemButton>
+          <ListItemButton
+            href="/game/tabs/settlement-change"
+          >
+            <ListItemIcon>
+              {/* <tabs.SettlementChange.Icon /> */}
+            </ListItemIcon>
+            <ListItemText>
+              Settlement Change
+            </ListItemText>
+          </ListItemButton>
         </List>
       </Box>
     </SwipeableDrawer>
