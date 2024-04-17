@@ -87,7 +87,7 @@ export default function LoginForm() {
         </Typography>
         <TextField
           sx={{ gridColumn: "1 / span 2" }}
-          className="w-full"
+          className="w-full !mt-4"
           label="Settlement"
           name="username"
           inputProps={register("username")}
