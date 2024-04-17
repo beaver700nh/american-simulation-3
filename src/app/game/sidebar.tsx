@@ -1,11 +1,29 @@
 "use client";
 
-import { Box, List, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar } from "@mui/material";
+import { Box, List, SwipeableDrawer, Toolbar } from "@mui/material";
+import { Article, House, Map, Security } from "@mui/icons-material";
 
-import { camelToKebab, camelToTitle } from "@/app/lib/case-convert";
+import { useSidebar } from "@/app/sidebar-manager";
+import SidebarTab from "@/app/game/sidebar-tab";
 
-import { useSidebar } from "@/components/sidebar-manager";
-import * as tabs from "@/app/game/tabs/aggregation";
+const tabs = [
+  {
+    name: "mainMenu",
+    icon: House,
+  },
+  {
+    name: "settlementMap",
+    icon: Map,
+  },
+  {
+    name: "settlementSheet",
+    icon: Article,
+  },
+  {
+    name: "settlementChange",
+    icon: Security,
+  },
+] as const;
 
 export default function Sidebar() {
   const [open, setOpen] = useSidebar();
@@ -22,46 +40,12 @@ export default function Sidebar() {
         className="overflow-auto"
       >
         <List>
-          <ListItemButton
-            href="/game/tabs/main-menu"
-          >
-            <ListItemIcon>
-              {/* <tabs.MainMenu.Icon /> */}
-            </ListItemIcon>
-            <ListItemText>
-              Main Menu
-            </ListItemText>
-          </ListItemButton>
-          <ListItemButton
-            href="/game/tabs/settlement-map"
-          >
-            <ListItemIcon>
-              {/* <tabs.SettlementMap.Icon /> */}
-            </ListItemIcon>
-            <ListItemText>
-              Settlement Map
-            </ListItemText>
-          </ListItemButton>
-          <ListItemButton
-            href="/game/tabs/settlement-sheet"
-          >
-            <ListItemIcon>
-              {/* <tabs.SettlementSheet.Icon /> */}
-            </ListItemIcon>
-            <ListItemText>
-              Settlement Sheet
-            </ListItemText>
-          </ListItemButton>
-          <ListItemButton
-            href="/game/tabs/settlement-change"
-          >
-            <ListItemIcon>
-              {/* <tabs.SettlementChange.Icon /> */}
-            </ListItemIcon>
-            <ListItemText>
-              Settlement Change
-            </ListItemText>
-          </ListItemButton>
+          {tabs.map(tab =>
+          <SidebarTab
+            key={tab.name}
+            {...tab}
+          />
+          )}
         </List>
       </Box>
     </SwipeableDrawer>
