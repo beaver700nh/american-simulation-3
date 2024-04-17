@@ -3,7 +3,8 @@
 import { useMemo } from "react";
 
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import { LightMode, DarkMode, Menu } from "@mui/icons-material";
+import { LightMode, DarkMode } from "@mui/icons-material";
+// import { LightMode, DarkMode, Menu } from "@mui/icons-material";
 
 import AccountMenu from "@/components/account-menu";
 import { useColorMode } from "@/components/theme-manager";
@@ -12,7 +13,8 @@ import Link from "next/link";
 
 export default function GlobalNav() {
   const theme = useTheme();
-  const [, setColorMode] = useColorMode();
+  const [_, setColorMode] = useColorMode();
+  // const [, setColorMode] = useColorMode();
   // const [, setSidebar] = useSidebar();
 
   const toggleColorMode = useMemo(() => () => {
@@ -25,21 +27,22 @@ export default function GlobalNav() {
 
   return (
     <AppBar
-      sx={{ zIndex: theme.zIndex.drawer + 1 }}
+      // sx={{ zIndex: theme.zIndex.drawer + 1 }}
       position="sticky"
     >
       <Toolbar>
-        <IconButton
+        {/* <IconButton
           // onClick={toggleSidebar}
           edge="start"
           title="Menu"
         >
           <Menu />
-        </IconButton>
+        </IconButton> */}
         <Link
-          className="grow ms-2"
+          className="grow"
+          // className="grow ms-2"
           href="/"
-          title="Home"
+          // title="Home"
         >
           <Typography
             variant="button"
