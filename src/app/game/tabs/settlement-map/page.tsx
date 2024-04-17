@@ -1,4 +1,4 @@
-export { Map as Icon } from "@mui/icons-material";
+// export { Map as Icon } from "@mui/icons-material";
 
 export const index = 1;
 

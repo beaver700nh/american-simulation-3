@@ -1,4 +1,4 @@
-export { Article as Icon } from "@mui/icons-material";
+// export { Article as Icon } from "@mui/icons-material";
 
 export const index = 2;
 

@@ -34,7 +34,8 @@ export default function Sidebar() {
           >
             <ListItemButton>
               <ListItemIcon>
-                <data.Icon />
+                {/* <data.Icon /> */}
+                <span>Foo</span>
               </ListItemIcon>
               <ListItemText
                 primary={camelToTitle(name)}
