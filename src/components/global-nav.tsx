@@ -7,21 +7,21 @@ import { LightMode, DarkMode, Menu } from "@mui/icons-material";
 
 import AccountMenu from "@/components/account-menu";
 import { useColorMode } from "@/components/theme-manager";
-import { useSidebar } from "@/components/sidebar-manager";
+// import { useSidebar } from "@/components/sidebar-manager";
 import Link from "next/link";
 
 export default function GlobalNav() {
   const theme = useTheme();
   const [, setColorMode] = useColorMode();
-  const [, setSidebar] = useSidebar();
+  // const [, setSidebar] = useSidebar();
 
   const toggleColorMode = useMemo(() => () => {
     setColorMode(mode => mode === "light" ? "dark" : "light");
   }, [setColorMode]);
 
-  const toggleSidebar = useMemo(() => () => {
-    setSidebar(open => !open);
-  }, [setSidebar]);
+  // const toggleSidebar = useMemo(() => () => {
+  //   setSidebar(open => !open);
+  // }, [setSidebar]);
 
   return (
     <AppBar
@@ -30,7 +30,7 @@ export default function GlobalNav() {
     >
       <Toolbar>
         <IconButton
-          onClick={toggleSidebar}
+          // onClick={toggleSidebar}
           edge="start"
           title="Menu"
         >

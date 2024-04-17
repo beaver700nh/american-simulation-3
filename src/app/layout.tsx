@@ -8,7 +8,7 @@ import GlobalNav from "@/components/global-nav";
 
 import "./globals.css";
 import ThemeManager from "@/components/theme-manager";
-import SidebarManager from "@/components/sidebar-manager";
+// import SidebarManager from "@/components/sidebar-manager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <AppRouterCacheProvider>
           <ThemeManager>
-          <SidebarManager>
+          {/* <SidebarManager> */}
             <CssBaseline />
             <GlobalNav />
             <main
@@ -42,7 +42,7 @@ export default function RootLayout({
             >
               {children}
             </main>
-          </SidebarManager>
+          {/* </SidebarManager> */}
           </ThemeManager>
         </AppRouterCacheProvider>
       </body>
