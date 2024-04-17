@@ -1,13 +1,29 @@
 "use client";
 
-import Link from "next/link";
+import { Box, List, SwipeableDrawer, Toolbar } from "@mui/material";
+import { Article, House, Map, Security } from "@mui/icons-material";
 
-import { Box, List, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar } from "@mui/material";
+import { useSidebar } from "@/app/sidebar-manager";
+import SidebarTab from "@/app/game/sidebar-tab";
 
-import { camelToKebab, camelToTitle } from "@/app/lib/case-convert";
-
-import { useSidebar } from "@/components/sidebar-manager";
-import * as tabs from "@/app/game/tabs/aggregation";
+const tabs = [
+  {
+    name: "mainMenu",
+    icon: House,
+  },
+  {
+    name: "settlementMap",
+    icon: Map,
+  },
+  {
+    name: "settlementSheet",
+    icon: Article,
+  },
+  {
+    name: "settlementChange",
+    icon: Security,
+  },
+] as const;
 
 export default function Sidebar() {
   const [open, setOpen] = useSidebar();
@@ -24,24 +40,11 @@ export default function Sidebar() {
         className="overflow-auto"
       >
         <List>
-          {Object
-            .entries(tabs)
-            .sort(([, a], [, b]) => a.index - b.index)
-            .map(([name, data]) =>
-          <Link
-            key={name}
-            href={`/game/tabs/${camelToKebab(name)}`}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                {/* <data.Icon /> */}
-                <span>Foo</span>
-              </ListItemIcon>
-              <ListItemText
-                primary={camelToTitle(name)}
-              />
-            </ListItemButton>
-          </Link>
+          {tabs.map(tab =>
+          <SidebarTab
+            key={tab.name}
+            {...tab}
+          />
           )}
         </List>
       </Box>

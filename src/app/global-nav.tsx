@@ -5,9 +5,9 @@ import { useMemo } from "react";
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
 import { LightMode, DarkMode, Menu } from "@mui/icons-material";
 
-import AccountMenu from "@/components/account-menu";
-import { useColorMode } from "@/components/theme-manager";
-import { useSidebar } from "@/components/sidebar-manager";
+import AccountMenu from "@/app/account-menu";
+import { useColorMode } from "@/app/theme-manager";
+import { useSidebar } from "@/app/sidebar-manager";
 import Link from "next/link";
 
 export default function GlobalNav() {
