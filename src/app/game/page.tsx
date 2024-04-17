@@ -1,11 +1,5 @@
-import { Button, Input } from "@mui/material";
+import { redirect } from "next/navigation";
 
 export default function Game() {
-  return (
-    <main className="flex flex-col items-center justify-center">
-      <p>Hello, world!</p>
-      <Input />
-      <Button>Button!</Button>
-    </main>
-  );
+  redirect("/game/tabs/main-menu");
 }

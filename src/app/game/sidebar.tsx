@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar } from "@mui/material";
+
+import { camelToKebab, camelToTitle } from "@/app/lib/case-convert";
 
 import { useSidebar } from "@/components/sidebar-manager";
 import * as tabs from "@/app/game/tabs/aggregation";
@@ -22,16 +22,19 @@ export default function Sidebar() {
         className="overflow-auto"
       >
         <List>
-          {Object.entries(tabs).map(([name, data]) =>
+          {Object
+            .entries(tabs)
+            .sort(([, a], [, b]) => a.index - b.index)
+            .map(([name, data]) =>
           <ListItemButton
             key={name}
-            href={`/game/${name}`}
+            href={`/game/tabs/${camelToKebab(name)}`}
           >
             <ListItemIcon>
               <data.Icon />
             </ListItemIcon>
             <ListItemText>
-              {name}
+              {camelToTitle(name)}
             </ListItemText>
           </ListItemButton>
           )}
