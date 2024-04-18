@@ -7,8 +7,11 @@ import { signOut } from "next-auth/react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 
+import { useSidebar } from "@/app/contexts/sidebar-manager";
+
 export default function AccountMenu() {
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
+  const [, setSidebar] = useSidebar();
 
   const openMenu = useMemo(() => (event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchor(event.currentTarget);
@@ -20,13 +23,13 @@ export default function AccountMenu() {
 
   const handleSignOut = useMemo(() => async () => {
     closeMenu();
+    setSidebar(false);
     await signOut();
-  }, [closeMenu]);
+  }, [closeMenu, setSidebar]);
 
   return (
     <>
       <IconButton
-        edge="end"
         title="Account Info"
         onClick={openMenu}
       >

@@ -4,11 +4,12 @@ import { Inter } from "next/font/google";
 import { CssBaseline, PaletteMode } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
+import ThemeManager from "@/app/contexts/theme-manager";
+import SidebarManager from "@/app/contexts/sidebar-manager";
+import SessionManager from "@/app/contexts/session-manager";
 import GlobalNav from "@/app/global-nav";
 
 import "./globals.css";
-import ThemeManager from "@/app/theme-manager";
-import SidebarManager from "@/app/sidebar-manager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeManager>
           <SidebarManager>
+          <SessionManager>
             <CssBaseline />
             <GlobalNav />
             <main
@@ -42,6 +44,7 @@ export default function RootLayout({
             >
               {children}
             </main>
+          </SessionManager>
           </SidebarManager>
           </ThemeManager>
         </AppRouterCacheProvider>

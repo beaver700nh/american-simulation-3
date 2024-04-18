@@ -1,12 +1,12 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 
-export default function MainMenu() {
+export default function Home() {
   return (
     <Box
       className="grow flex relative"
     >
       <Stack
-        className="m-auto text-center"
+        className="m-auto p-10 text-center"
       >
         <Typography
           variant="h4"

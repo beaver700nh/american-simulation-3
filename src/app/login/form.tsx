@@ -12,6 +12,14 @@ import { Box, Button, Icon, MenuItem, TextField, Typography, alpha, useTheme } f
 
 import { LoginSchema, loginSchema } from "@/app/lib/schema";
 
+// TODO:
+// - fix overflow on mobile
+// - add database for users
+// - add "delete account" under account-menu
+// - add "change password" under account-menu
+// - add "signed in as" under home
+// - add select-settlement component
+
 export default function LoginForm() {
   const theme = useTheme();
   const router = useRouter();
@@ -119,7 +127,7 @@ export default function LoginForm() {
           disabled={isSubmitting}
           disableElevation
         >
-          Next
+          Go!
         </Button>
         {errors.root && <Typography
           sx={{ gridColumn: "1 / span 2", color: theme.palette.error.main }}

@@ -1,28 +1,37 @@
 "use client";
 
 import { Box, List, SwipeableDrawer, Toolbar } from "@mui/material";
-import { Article, House, Map, Security } from "@mui/icons-material";
+import { Article, House, Map, Security, Settings } from "@mui/icons-material";
 
-import { useSidebar } from "@/app/sidebar-manager";
+import { useSidebar } from "@/app/contexts/sidebar-manager";
 import SidebarTab from "@/app/game/sidebar-tab";
 
 const tabs = [
   {
-    name: "mainMenu",
+    name: "home",
+    title: "Dashboard view with general information",
     icon: House,
   },
   {
     name: "settlementMap",
+    title: "Build or tear down buildings, roads, and more",
     icon: Map,
   },
   {
     name: "settlementSheet",
+    title: "View your settlement's statistics over time",
     icon: Article,
   },
   {
     name: "settlementChange",
+    title: "See how historical events have affected your settlement",
     icon: Security,
   },
+  {
+    name: "settings",
+    title: "See and change your preferences",
+    icon: Settings,
+  }
 ] as const;
 
 export default function Sidebar() {
