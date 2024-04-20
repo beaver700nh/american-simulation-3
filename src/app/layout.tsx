@@ -30,8 +30,13 @@ export default function RootLayout({
     <html
       lang="en"
     >
+      <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body
-        className={`fixed inset-0 flex flex-col ${inter.className}`}
+        className={`fixed inset-0 flex flex-col overflow-auto ${inter.className}`}
       >
         <AppRouterCacheProvider>
           <ThemeManager>

@@ -56,87 +56,91 @@ export default function LoginForm() {
 
   return (
     <Box
-      className="grow flex relative"
+      className="grow relative"
     >
       <Image
-        className="object-cover -z-10 opacity-50 blur-sm"
+        className="object-cover opacity-50 blur-sm"
         src="/assets/paper-version.jpg"
         alt=""
         fill
         priority
       />
-      <form
-        style={{
-          width: "calc(25lvw + 25lvh)",
-          backgroundColor: alpha(theme.palette.background.default, 0.75),
-          gridTemplateRows: "repeat(auto-fit, min-content)",
-          gridTemplateColumns: "min-content 1fr",
-        }}
-        className="!min-w-min max-w-full !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg shadow-xl"
-        onSubmit={handleSubmit(onSubmit)}
+      <div
+        className="absolute inset-0 flex p-2 overflow-auto"
       >
-        <Icon
-          sx={{ gridColumn: "1" }}
-          className="relative !text-[3rem]"
+        <form
+          style={{
+            width: "calc(25lvw + 25lvh)",
+            backgroundColor: alpha(theme.palette.background.default, 0.75),
+            gridTemplateRows: "repeat(auto-fit, min-content)",
+            gridTemplateColumns: "min-content 1fr",
+          }}
+          className="!min-w-min !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg shadow-2xl"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <Image
-            className="object-contain"
-            src="/logo.png"
-            alt=""
-            sizes="3rem"
-            fill
+          <Icon
+            sx={{ gridColumn: "1" }}
+            className="relative !text-[3rem]"
+          >
+            <Image
+              className="object-contain"
+              src="/logo.png"
+              alt=""
+              sizes="3rem"
+              fill
+            />
+          </Icon>
+          <Typography
+            sx={{ gridColumn: "2" }}
+            variant="h5"
+          >
+            Sign In
+          </Typography>
+          <TextField
+            sx={{ gridColumn: "1 / span 2" }}
+            className="w-full !mt-4"
+            label="Settlement"
+            name="username"
+            inputProps={register("username")}
+            select
+            value="1" // temp
+            error={!!errors.username}
+            helperText={errors.username?.message}
+          >
+            <MenuItem value="1">Test Item A</MenuItem>
+            <MenuItem value="2">Test Item B</MenuItem>
+            <MenuItem value="3">Test Item C</MenuItem>
+            <MenuItem value="4">Test Item D</MenuItem>
+          </TextField>
+          <TextField
+            sx={{ gridColumn: "1 / span 2" }}
+            className="w-full"
+            label="Password"
+            type="password"
+            name="password"
+            inputProps={register("password")}
+            error={!!errors.password}
+            helperText={errors.password?.message}
           />
-        </Icon>
-        <Typography
-          sx={{ gridColumn: "2" }}
-          variant="h5"
-        >
-          Sign In
-        </Typography>
-        <TextField
-          sx={{ gridColumn: "1 / span 2" }}
-          className="w-full !mt-4"
-          label="Settlement"
-          name="username"
-          inputProps={register("username")}
-          select
-          value="1" // temp
-          error={!!errors.username}
-          helperText={errors.username?.message}
-        >
-          <MenuItem value="1">Test Item A</MenuItem>
-          <MenuItem value="2">Test Item B</MenuItem>
-          <MenuItem value="3">Test Item C</MenuItem>
-          <MenuItem value="4">Test Item D</MenuItem>
-        </TextField>
-        <TextField
-          sx={{ gridColumn: "1 / span 2" }}
-          className="w-full"
-          label="Password"
-          type="password"
-          name="password"
-          inputProps={register("password")}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <Button
-          sx={{ gridColumn: "1 / span 2" }}
-          className="w-full !normal-case"
-          variant="contained"
-          type="submit"
-          disabled={isSubmitting}
-          disableElevation
-        >
-          Go!
-        </Button>
-        {errors.root && <Typography
-          sx={{ gridColumn: "1 / span 2", color: theme.palette.error.main }}
-          className="w-full !-my-2"
-          variant="caption"
-        >
-          {errors.root.message}
-        </Typography>}
-      </form>
+          <Button
+            sx={{ gridColumn: "1 / span 2" }}
+            className="w-full !normal-case"
+            variant="contained"
+            type="submit"
+            disabled={isSubmitting}
+            disableElevation
+          >
+            Go!
+          </Button>
+          {errors.root && <Typography
+            sx={{ gridColumn: "1 / span 2", color: theme.palette.error.main }}
+            className="w-full !-my-2"
+            variant="caption"
+          >
+            {errors.root.message}
+          </Typography>}
+        </form>
+      </div>
     </Box>
   )
 }

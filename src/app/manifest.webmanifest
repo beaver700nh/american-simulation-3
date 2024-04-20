@@ -5,8 +5,9 @@
   "description": "A game simulating the early United States from the colonial era into the Industrial Revolution, based on a MS Excel program written by Mr. White",
   "version": "1.0.0",
   "author": "Minh Le",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape",
+  "scope": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
