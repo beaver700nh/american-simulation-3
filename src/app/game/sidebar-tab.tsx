@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
-import { camelToKebab, camelToTitle } from "@/app/lib/case-convert";
+import { camelToKebab, camelToTitle } from "@/lib/case-convert";
 
 type SidebarTabProps = {
   name: string;

@@ -12,11 +12,16 @@ import { useColorMode } from "@/app/contexts/theme-manager";
 import { useSidebar } from "@/app/contexts/sidebar-manager";
 import Link from "next/link";
 
+// TODO:
+// - refactor this component to reduce renders
+
 export default function GlobalNav() {
   const theme = useTheme();
   const { data: session } = useSession();
   const [, setColorMode] = useColorMode();
   const [, setSidebar] = useSidebar();
+
+  console.log("global-nav:", session);
 
   const toggleColorMode = useMemo(() => () => {
     setColorMode(mode => mode === "light" ? "dark" : "light");
@@ -34,7 +39,7 @@ export default function GlobalNav() {
       <Toolbar
         className="!px-2"
       >
-        {session && <IconButton
+        {session?.user && <IconButton
           onClick={toggleSidebar}
           title="Menu"
         >
@@ -60,7 +65,7 @@ export default function GlobalNav() {
           <LightMode /> :
           <DarkMode />}
         </IconButton>
-        {session && <AccountMenu />}
+        {session?.user && <AccountMenu />}
       </Toolbar>
     </AppBar>
   );
