@@ -4,14 +4,13 @@ import Image from "next/image";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 
-import { signIn } from "next-auth/react";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, Icon, MenuItem, TextField, Typography, alpha, useTheme } from "@mui/material";
 
 import { LoginSchema, loginSchema } from "@/lib/schema";
+import { login } from "@/lib/auth-actions";
 
 // TODO:
 // - add database for users
@@ -36,10 +35,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = useMemo(() => async (data: LoginSchema) => {
-    await signIn("credentials", {
-      ...data,
-      redirect: false,
-    });
+    console.log(await login(data));
     router.refresh();
   }, [router]);
 

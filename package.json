@@ -29,7 +29,8 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/material-nextjs": "^5.15.11",
-    "bcrypt": "^5.1.1",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
     "next": "14.1.4",
     "next-auth": "^5.0.0-beta.16",
     "react": "^18",
@@ -38,7 +39,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-import { signOut } from "next-auth/react";
-
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 
+import { logout } from "@/lib/auth-actions";
 import { useSidebar } from "@/app/contexts/sidebar-manager";
 
 export default function AccountMenu() {
@@ -24,7 +23,7 @@ export default function AccountMenu() {
   const handleSignOut = useMemo(() => async () => {
     closeMenu();
     setSidebar(false);
-    await signOut();
+    await logout();
   }, [closeMenu, setSidebar]);
 
   return (

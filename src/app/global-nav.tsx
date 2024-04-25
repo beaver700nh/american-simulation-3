@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import Link from "next/link";
 
 import { useSession } from "next-auth/react";
 
@@ -10,18 +11,12 @@ import { LightMode, DarkMode, Menu } from "@mui/icons-material";
 import AccountMenu from "@/app/account-menu";
 import { useColorMode } from "@/app/contexts/theme-manager";
 import { useSidebar } from "@/app/contexts/sidebar-manager";
-import Link from "next/link";
-
-// TODO:
-// - refactor this component to reduce renders
 
 export default function GlobalNav() {
   const theme = useTheme();
-  const { data: session } = useSession();
   const [, setColorMode] = useColorMode();
   const [, setSidebar] = useSidebar();
-
-  console.log("global-nav:", session);
+  const { update, data: session } = useSession();
 
   const toggleColorMode = useMemo(() => () => {
     setColorMode(mode => mode === "light" ? "dark" : "light");

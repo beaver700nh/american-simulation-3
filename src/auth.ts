@@ -1,7 +1,25 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin, User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-import { authConfig } from "./auth.config";
+import { compare } from "bcryptjs";
+
+import { authConfig } from "@/auth.config";
+import { LoginSchema, loginSchema } from "@/lib/schema";
+
+async function getUser(credentials: LoginSchema) {
+  const user = {
+    id: "SOME_ID",
+    name: credentials.username,
+    password: "$2y$12$ZmiX0wPD4BC8LgnDUpHUDuxK2EkBITGW23dkuocBIv2E5vrQ.8.d.",
+  };
+
+  if (!await compare(credentials.password, user.password)) {
+    throw new CredentialsSignin("Incorrect username or password");
+  }
+
+  const { password: _, ...profile } = user;
+  return profile satisfies User;
+}
 
 export const {
   auth,
@@ -18,17 +36,13 @@ export const {
         password: {},
       },
       async authorize(credentials) {
-        console.log("authorize:", credentials);
-        return { id: "SOME_ID", password: "$2a$12$0ZyLyY/B3ToUGC9feMEUPOfgqFIQKVMrNtJOMbjhYvYYBQDjd34uy" };
+        const parsed = loginSchema.safeParse(credentials);
 
-        // const { username, password } = parsedCredentials.data;
-        // const user = { id: "SOME_ID", password: "$2a$12$0ZyLyY/B3ToUGC9feMEUPOfgqFIQKVMrNtJOMbjhYvYYBQDjd34uy" };
+        if (!parsed.success) {
+          throw new CredentialsSignin("Invalid format for credentials");
+        }
 
-        // if (!await compare(password, user.password)) {
-        //   throw new Error("Incorrect password");
-        // }
-
-        // return user;
+        return await getUser(parsed.data);
       },
     }),
   ]
