@@ -10,7 +10,7 @@ async function getUser(credentials: LoginSchema) {
   const user = {
     id: "SOME_ID",
     name: credentials.username,
-    password: "$2y$12$ZmiX0wPD4BC8LgnDUpHUDuxK2EkBITGW23dkuocBIv2E5vrQ.8.d.",
+    password: "$2y$10$ANUAkR0nXVHKurftlQQ85.IRuNoUg89p1xJxB9qIpKI2ln3Z6pjky",
   };
 
   if (!await compare(credentials.password, user.password)) {

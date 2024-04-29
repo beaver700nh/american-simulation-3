@@ -1,20 +1,15 @@
-"use client";
+import { SessionProvider } from "next-auth/react";
 
-import { useEffect, useState } from "react";
+import { auth } from "@/auth";
 
-import { Session } from "next-auth";
-import { SessionProvider, getSession } from "next-auth/react";
-
-export default function SessionManager({
+export default async function SessionManager({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    getSession().then(setSession);
-  }, [setSession]);
+  const session = await auth();
+  // This seems to work but useSession is always undefined so we use auth() instead
+  // console.log("Manager updated:", session);
 
   return (
     <SessionProvider

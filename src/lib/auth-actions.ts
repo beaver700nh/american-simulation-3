@@ -10,7 +10,7 @@ export async function login(data: Record<string, any>) {
       success: true,
       result: await signIn("credentials", {
         ...data,
-        // redirect: false,
+        redirect: false,
       }),
     };
   }
