@@ -8,7 +8,6 @@ import { LoginSchema, loginSchema } from "@/lib/schema";
 
 async function getUser(credentials: LoginSchema) {
   const user = {
-    id: "SOME_ID",
     name: credentials.username,
     password: "$2y$10$ANUAkR0nXVHKurftlQQ85.IRuNoUg89p1xJxB9qIpKI2ln3Z6pjky",
   };
@@ -30,7 +29,6 @@ export const {
   ...authConfig,
   providers: [
     Credentials({
-      name: "credentials",
       credentials: {
         username: {},
         password: {},

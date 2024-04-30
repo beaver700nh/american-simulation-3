@@ -6,12 +6,12 @@ import { signIn, signOut } from "@/auth";
 
 export async function login(data: Record<string, any>) {
   try {
+    await signIn("credentials", {
+      ...data,
+      redirect: false,
+    });
     return {
       success: true,
-      result: await signIn("credentials", {
-        ...data,
-        redirect: false,
-      }),
     };
   }
   catch (e) {

@@ -35,7 +35,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = useMemo(() => async (data: LoginSchema) => {
-    console.log(await login(data));
+    await login(data);
     router.refresh();
   }, [router]);
 
