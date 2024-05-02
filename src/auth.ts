@@ -13,7 +13,7 @@ async function getUser(credentials: LoginSchema) {
   };
 
   if (!await compare(credentials.password, user.password)) {
-    throw new CredentialsSignin("Incorrect username or password");
+    throw Object.assign(new CredentialsSignin("Incorrect username or password"), { source: "password" });
   }
 
   const { password: _, ...profile } = user;
@@ -37,7 +37,7 @@ export const {
         const parsed = loginSchema.safeParse(credentials);
 
         if (!parsed.success) {
-          throw new CredentialsSignin("Invalid format for credentials");
+          throw Object.assign(new CredentialsSignin("Invalid format for credentials"), { source: "root" });
         }
 
         return await getUser(parsed.data);

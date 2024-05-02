@@ -28,16 +28,20 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
     setError,
+    formState: { errors, isSubmitting },
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = useMemo(() => async (data: LoginSchema) => {
-    await login(data);
+    const result = await login(data);
+    if (!result.success) {
+      setError(result.error!.source as any, { message: result.error!.message });
+    }
+
     router.refresh();
-  }, [router]);
+  }, [setError, router]);
 
   return (
     <div
@@ -74,12 +78,14 @@ export default function LoginForm() {
         </Typography>
         <TextField
           sx={{ gridColumn: "1 / span 2" }}
-          className="w-full !mt-4"
+          className="!mt-4"
           label="Settlement"
           name="username"
           inputProps={register("username")}
+          InputLabelProps={{ shrink: true }}
+          defaultValue="1"
           select
-          value="1" // temp
+          fullWidth
           error={!!errors.username}
           helperText={errors.username?.message}
         >
@@ -90,21 +96,22 @@ export default function LoginForm() {
         </TextField>
         <TextField
           sx={{ gridColumn: "1 / span 2" }}
-          className="w-full"
           label="Password"
           type="password"
           name="password"
           inputProps={register("password")}
+          fullWidth
           error={!!errors.password}
           helperText={errors.password?.message}
         />
         <Button
           sx={{ gridColumn: "1 / span 2" }}
-          className="w-full !normal-case"
+          className="!normal-case"
           variant="contained"
           type="submit"
           disabled={isSubmitting}
           disableElevation
+          fullWidth
         >
           Go!
         </Button>

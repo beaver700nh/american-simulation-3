@@ -22,9 +22,11 @@ export async function login(data: Record<string, any>) {
       throw e;
     }
 
+    const { source, message } = e as AuthError & { source: string };
+
     return {
       success: false,
-      error: e.message,
+      error: { source, message: message.split(". Read more at")[0] },
     };
   }
 }
