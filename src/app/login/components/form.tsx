@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, Icon, MenuItem, TextField, Typography, alpha, useTheme } from "@mui/material";
 
+import { useGameMetadata } from "@/app/contexts/game-metadata-manager";
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { login } from "@/lib/auth-actions";
 
@@ -24,6 +25,9 @@ import { login } from "@/lib/auth-actions";
 export default function LoginForm() {
   const theme = useTheme();
   const router = useRouter();
+
+  const [data,] = useGameMetadata();
+  console.log(data);
 
   const {
     register,

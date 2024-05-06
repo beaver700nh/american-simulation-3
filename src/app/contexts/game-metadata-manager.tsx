@@ -1,32 +1,51 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 
-import type { Settlement } from "@prisma/client";
+import type { Settlement, Map } from "@prisma/client";
+
+import { getSettlements } from "@/lib/database";
 
 type GameDataContext = [
-  data: GameMetadata;
+  data: GameMetadata | null,
+  setData: Dispatch<SetStateAction<GameMetadata | null>>,
 ];
 
 type GameMetadata = {
-  game: 
-}
+  settlements: (Settlement & { initialMap: Map })[];
+};
 
-export default async function GameMetadataManager({
+export const GameDataContext = createContext<GameDataContext | null>(null);
+
+export default function GameMetadataManager({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-  // This seems to work as a workaround: useSession always returnes an undefined
-  //   session so we use auth() instead
-  // console.log("Manager updated:", session);
+  const [data, setData] = useState<GameMetadata | null>(null);
+
+  useEffect(() => {
+    getSettlements()
+    .then(settlements => {
+      setData(old => ({ ...old, settlements }));
+    });
+  }, []);
 
   return (
-    <SessionProvider
-      session={session}
+    <GameDataContext.Provider
+      value={[ data, setData ]}
     >
       {children}
-    </SessionProvider>
+    </GameDataContext.Provider>
   );
+}
+
+export function useGameMetadata() {
+  const context = useContext(GameDataContext);
+
+  if (!context) {
+    throw new Error("useGameMetadata must be used within a GameMetadataManager");
+  }
+
+  return context;
 }

@@ -7,6 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeManager from "@/app/contexts/theme-manager";
 import SidebarManager from "@/app/contexts/sidebar-manager";
 import SessionManager from "@/app/contexts/session-manager";
+import GameMetadataManager from "@/app/contexts/game-metadata-manager";
 import GlobalNav from "@/app/components/global-nav";
 
 import "./globals.css";
@@ -42,6 +43,7 @@ export default function RootLayout({
           <ThemeManager>
           <SidebarManager>
           <SessionManager>
+          <GameMetadataManager>
             <CssBaseline />
             <GlobalNav />
             <main
@@ -49,6 +51,7 @@ export default function RootLayout({
             >
               {children}
             </main>
+          </GameMetadataManager>
           </SessionManager>
           </SidebarManager>
           </ThemeManager>
