@@ -7,7 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeManager from "@/app/contexts/theme-manager";
 import SidebarManager from "@/app/contexts/sidebar-manager";
 import SessionManager from "@/app/contexts/session-manager";
-import GlobalNav from "@/app/global-nav";
+import GlobalNav from "@/app/components/global-nav";
 
 import "./globals.css";
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Box } from "@mui/material";
 
 import { auth } from "@/auth";
-import LoginForm from "@/app/login/form";
+import LoginForm from "@/app/login/components/form";
 
 export default async function Login() {
   const session = await auth();

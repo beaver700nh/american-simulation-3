@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import GlobalNavInner from "@/app/global-nav-inner";
+import GlobalNavInner from "@/app/components/global-nav-inner";
 
 export default async function GlobalNav() {
   const session = await auth();

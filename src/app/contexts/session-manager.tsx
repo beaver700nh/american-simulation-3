@@ -8,7 +8,8 @@ export default async function SessionManager({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  // This seems to work but useSession is always undefined so we use auth() instead
+  // This seems to work as a workaround: useSession always returnes an undefined
+  //   session so we use auth() instead
   // console.log("Manager updated:", session);
 
   return (
