@@ -19,6 +19,7 @@ model Settlement {
 model Map {
   id           String      @id @default(uuid())
   orientation  Int
+  turn         Int
   hexes        Hex[]
   Settlement   Settlement? @relation(fields: [settlementId], references: [id])
   settlementId String?
