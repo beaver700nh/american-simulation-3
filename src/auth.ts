@@ -39,6 +39,9 @@ export const {
         if (!parsed.success) {
           throw Object.assign(new CredentialsSignin("Invalid format for credentials"), { source: "root" });
         }
+        if (!parsed.data.username) {
+          throw Object.assign(new CredentialsSignin("You must select a settlement"), { source: "username" });
+        }
 
         return await getUser(parsed.data);
       },
