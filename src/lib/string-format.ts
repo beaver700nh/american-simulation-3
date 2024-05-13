@@ -12,3 +12,17 @@ export function camelToTitle(camel: string): string {
 export function formatSettlementName(settlement: Settlement): string {
   return `${camelToTitle(settlement.id)}, ${settlement.colony.toUpperCase()}`;
 }
+
+export function formatSettlementFromId(username: string | null | undefined): string {
+  const parts = username?.match(/(?<id>.*)-(?<colony>.*)/)?.groups;
+
+  if (parts == null) {
+    return "Unknown Settlement";
+  }
+
+  return formatSettlementName(parts as Settlement);
+}
+
+export function formatSettlementToId(settlement: Settlement): string {
+  return `${settlement.id}-${settlement.colony}`;
+}

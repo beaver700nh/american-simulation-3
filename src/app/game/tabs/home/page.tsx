@@ -2,6 +2,8 @@ import { Box, Divider, Stack, Typography } from "@mui/material";
 
 import { auth } from "@/auth";
 
+import { formatSettlementFromId } from "@/lib/string-format";
+
 export default async function Home() {
   const session = await auth();
 
@@ -15,7 +17,7 @@ export default async function Home() {
         <Typography
           variant="h4"
         >
-          &ldquo;The Sim&rdquo;
+          The Sim
         </Typography>
         <Typography
           variant="h6"
@@ -37,7 +39,7 @@ export default async function Home() {
         <Typography
           variant="body1"
         >
-          You are: {session?.user?.name}
+          You are: {formatSettlementFromId(session?.user?.name)}
         </Typography>
       </Stack>
     </Box>

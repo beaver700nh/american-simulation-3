@@ -5,14 +5,26 @@ import { compare } from "bcryptjs";
 
 import { authConfig } from "@/auth.config";
 import { LoginSchema, loginSchema } from "@/lib/schema";
+import { getSettlements, updatePassword } from "@/lib/database";
+import { formatSettlementToId } from "@/lib/string-format";
 
 async function getUser(credentials: LoginSchema) {
+  const settlement = (await getSettlements({ account: true }))
+    .find(settlement => credentials.username === formatSettlementToId(settlement));
+
+  if (settlement == null) {
+    throw Object.assign(new CredentialsSignin("Settlement does not exist"), { source: "username" });
+  }
+
   const user = {
     name: credentials.username,
-    password: "$2y$10$ANUAkR0nXVHKurftlQQ85.IRuNoUg89p1xJxB9qIpKI2ln3Z6pjky",
+    password: settlement.account.password,
   };
 
-  if (!await compare(credentials.password, user.password)) {
+  if (user.password == null) {
+    updatePassword(settlement.id, { plain: credentials.password });
+  }
+  else if (!await compare(credentials.password, user.password)) {
     throw Object.assign(new CredentialsSignin("Incorrect username or password"), { source: "password" });
   }
 

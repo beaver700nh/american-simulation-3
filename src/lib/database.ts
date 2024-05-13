@@ -1,18 +1,26 @@
 "use server";
 
+import { hash } from "bcryptjs";
+
 import prisma from "@/lib/prisma";
 
-export async function getSettlements() {
-  return (await prisma.settlement.findMany({
-    include: {
-      maps: true,
+import { Prisma } from "@prisma/client";
+
+export async function getSettlements(include: Prisma.SettlementInclude = {}) {
+  return await prisma.settlement.findMany({ include });
+}
+
+export async function updatePassword(settlementId: string, password: { plain: string } | { hash: string }) {
+  await prisma.settlement.update({
+    where: {
+      id: settlementId
     },
-  }))?.map(
-    settlement => {
-      const { maps, ...rest } = settlement;
-      return {
-        ...rest, initialMap: maps[0],
-      };
-    }
-  ) ?? [];
+    data: {
+      account: {
+        update: {
+          password: "hash" in password ? password.hash : await hash(password.plain, 10),
+        }
+      }
+    },
+  });
 }

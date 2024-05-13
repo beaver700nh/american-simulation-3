@@ -2,14 +2,13 @@ import { ComponentProps } from "react";
 
 import { MenuItem, TextField } from "@mui/material";
 
-import { formatSettlementName } from "@/lib/string-format";
-
-import { useGameMetadata } from "@/app/contexts/game-metadata-manager";
+import { formatSettlementName, formatSettlementToId } from "@/lib/string-format";
+import { useSettlements } from "@/app/contexts/game-metadata-manager";
 
 type SettlementSelectProps = ComponentProps<typeof TextField>;
 
 export default function SettlementSelect(textFieldProps: SettlementSelectProps) {
-  const [data] = useGameMetadata();
+  const data = useSettlements();
 
   return (
     <TextField
@@ -25,8 +24,8 @@ export default function SettlementSelect(textFieldProps: SettlementSelectProps) 
       >
         Select a settlement&hellip;
       </MenuItem>
-      {data?.settlements.map(settlement => {
-        const longId = `${settlement.id}-${settlement.colony}`;
+      {data.map(settlement => {
+        const longId = formatSettlementToId(settlement);
         const humanName = formatSettlementName(settlement);
 
         return (

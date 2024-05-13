@@ -1,51 +1,56 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import type { Settlement, Map } from "@prisma/client";
+import { Settlement } from "@prisma/client";
 
 import { getSettlements } from "@/lib/database";
 
-type GameDataContext = [
-  data: GameMetadata | null,
-  setData: Dispatch<SetStateAction<GameMetadata | null>>,
-];
-
-type GameMetadata = {
-  settlements: (Settlement & { initialMap: Map })[];
+type GameMetadataContext = {
 };
 
-export const GameDataContext = createContext<GameDataContext | null>(null);
+export const GameMetadataContext = createContext<GameMetadataContext | null>(null);
 
 export default function GameMetadataManager({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [data, setData] = useState<GameMetadata | null>(null);
+  const [data, setData] = useState<GameMetadataContext | null>(null);
 
   useEffect(() => {
-    getSettlements()
-    .then(settlements => {
-      setData(old => ({ ...old, settlements }));
-    });
   }, []);
 
   return (
-    <GameDataContext.Provider
-      value={[ data, setData ]}
+    <GameMetadataContext.Provider
+      value={data}
     >
       {children}
-    </GameDataContext.Provider>
+    </GameMetadataContext.Provider>
   );
 }
 
 export function useGameMetadata() {
-  const context = useContext(GameDataContext);
+  const context = useContext(GameMetadataContext);
 
   if (!context) {
     throw new Error("useGameMetadata must be used within a GameMetadataManager");
   }
 
   return context;
+}
+
+export function useSettlements() {
+  const [data, setData] = useState<Settlement[]>([]);
+
+  useEffect(() => {
+    getSettlements({
+      maps: true
+    })
+    .then(settlements => {
+      setData(settlements);
+    });
+  }, []);
+
+  return data;
 }

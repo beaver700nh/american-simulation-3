@@ -49,6 +49,11 @@ export default function AccountMenu() {
         keepMounted
       >
         <MenuItem
+          onClick={closeMenu}
+        >
+          Change Password
+        </MenuItem>
+        <MenuItem
           onClick={handleSignOut}
         >
           Sign Out
