@@ -11,33 +11,36 @@ datasource db {
 }
 
 model Settlement {
-  id     String @id
-  colony String
-  account Account @relation(fields: [accountId], references: [id])
-  accountId String @unique
-  maps   Map[]
+  id        String  @id @default(uuid())
+  name      String
+  colony    String
+  account   Account @relation(fields: [accountId], references: [id])
+  accountId String  @unique
+  maps      Map[]
+
+  @@unique([name, colony])
 }
 
 model Account {
-  id String @id @default(uuid())
-  password String?
+  id         String      @id @default(uuid())
+  password   String?
   settlement Settlement?
 }
 
 model Map {
-  id           String      @id @default(uuid())
+  id           String     @id @default(uuid())
   orientation  Int
   turn         Int
   hexes        Hex[]
-  settlement   Settlement? @relation(fields: [settlementId], references: [id])
-  settlementId String?     @unique
+  settlement   Settlement @relation(fields: [settlementId], references: [id])
+  settlementId String     @unique
 }
 
 model Hex {
-  id       String  @id @default(uuid())
+  id       String @id @default(uuid())
   position Int
   type     String
   data     Int
-  map      Map?    @relation(fields: [mapId], references: [id])
-  mapId    String? @unique
+  map      Map    @relation(fields: [mapId], references: [id])
+  mapId    String @unique
 }

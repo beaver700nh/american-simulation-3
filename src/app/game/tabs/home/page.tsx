@@ -1,11 +1,12 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
 
 import { auth } from "@/auth";
-
-import { formatSettlementFromId } from "@/lib/string-format";
+import { formatSettlementName } from "@/lib/string-format";
+import { getSettlements } from "@/lib/database";
 
 export default async function Home() {
   const session = await auth();
+  const [settlement] = await getSettlements({}, { id: session?.user?.name ?? undefined });
 
   return (
     <Box
@@ -39,7 +40,7 @@ export default async function Home() {
         <Typography
           variant="body1"
         >
-          You are: {formatSettlementFromId(session?.user?.name)}
+          You are: {formatSettlementName(settlement)}
         </Typography>
       </Stack>
     </Box>

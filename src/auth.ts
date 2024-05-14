@@ -6,18 +6,16 @@ import { compare } from "bcryptjs";
 import { authConfig } from "@/auth.config";
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { getSettlements, updatePassword } from "@/lib/database";
-import { formatSettlementToId } from "@/lib/string-format";
 
 async function getUser(credentials: LoginSchema) {
-  const settlement = (await getSettlements({ account: true }))
-    .find(settlement => credentials.username === formatSettlementToId(settlement));
+  const [settlement] = await getSettlements({ account: true }, { id: credentials.username });
 
   if (settlement == null) {
     throw Object.assign(new CredentialsSignin("Settlement does not exist"), { source: "username" });
   }
 
   const user = {
-    name: credentials.username,
+    name: settlement.id,
     password: settlement.account.password,
   };
 

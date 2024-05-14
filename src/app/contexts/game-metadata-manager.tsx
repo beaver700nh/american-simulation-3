@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { Settlement } from "@prisma/client";
+import { Prisma, Settlement } from "@prisma/client";
 
 import { getSettlements } from "@/lib/database";
 
@@ -40,17 +40,15 @@ export function useGameMetadata() {
   return context;
 }
 
-export function useSettlements() {
+export function useSettlements(include: Prisma.SettlementInclude = {}) {
   const [data, setData] = useState<Settlement[]>([]);
 
   useEffect(() => {
-    getSettlements({
-      maps: true
-    })
+    getSettlements(include)
     .then(settlements => {
       setData(settlements);
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data;
 }
