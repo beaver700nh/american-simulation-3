@@ -17,7 +17,7 @@ export default function SidebarTab({
 }: SidebarTabProps) {
   return (
     <Link
-      href={`/game/tabs/${camelToKebab(name)}`}
+      href={`/game/${camelToKebab(name)}`}
     >
       <ListItemButton>
         <ListItemIcon>
