@@ -7,6 +7,7 @@ import { AccountCircle } from "@mui/icons-material";
 
 import { logout } from "@/lib/auth-actions";
 import { useSidebar } from "@/app/contexts/sidebar-manager";
+import Link from "next/link";
 
 export default function AccountMenu() {
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
@@ -51,7 +52,11 @@ export default function AccountMenu() {
         <MenuItem
           onClick={closeMenu}
         >
-          Change Password
+          <Link
+            href="/game/change-password"
+          >
+            Change Password
+          </Link>
         </MenuItem>
         <MenuItem
           onClick={handleSignOut}

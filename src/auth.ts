@@ -15,7 +15,7 @@ async function getUser(credentials: LoginSchema) {
   }
 
   const user = {
-    name: settlement.id,
+    id: settlement.id,
     password: settlement.account.password,
   };
 

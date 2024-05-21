@@ -6,7 +6,7 @@ import { getSettlements } from "@/lib/database";
 
 export default async function Home() {
   const session = await auth();
-  const [settlement] = await getSettlements({}, { id: session?.user?.name ?? undefined });
+  const [settlement] = await getSettlements({}, { id: session?.user?.id ?? undefined });
 
   return (
     <Box

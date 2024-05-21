@@ -15,11 +15,6 @@ import { login } from "@/lib/auth-actions";
 import SettlementList from "@/app/components/settlement-select";
 
 // TODO:
-// - add database for users
-// - add "delete account" under account-menu
-// - add "change password" under account-menu
-// - add "signed in as" under home
-// - add select-settlement component
 // - declarative routing
 // - strict mode
 
