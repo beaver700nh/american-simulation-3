@@ -14,12 +14,6 @@ export async function getSettlements(include: Prisma.SettlementInclude = {}, whe
 
 // TODO update to restrict access
 export async function updatePassword(settlementId: string, password: { plain: string } | { hash: string | null }) {
-  const session = await auth();
-
-  if (session == null) {
-    throw new Error("Unauthorized");
-  }
-
   await prisma.settlement.update({
     where: {
       id: settlementId
@@ -37,13 +31,13 @@ export async function updatePassword(settlementId: string, password: { plain: st
 export async function updateOwnPassword(password: { plain: string } | { hash: string | null }) {
   const session = await auth();
 
-  if (session == null || session.user == null || session.user.id == null) {
+  if (session == null || session.user == null || session.user.name == null) {
     throw new Error("Unauthorized");
   }
 
   await prisma.settlement.update({
     where: {
-      id: session.user.id
+      id: session.user.name
     },
     data: {
       account: {

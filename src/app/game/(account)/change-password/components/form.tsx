@@ -6,7 +6,13 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { updateOwnPassword } from "@/lib/database";
 
-export default function ChangePasswordForm() {
+type ChangePasswordFormProps = {
+  settlementId: string;
+};
+
+export default function ChangePasswordForm({
+  settlementId,
+}: ChangePasswordFormProps) {
   const changePassword = useMemo<FormEventHandler<HTMLFormElement>>(() => (event) => {
     event.preventDefault();
 
