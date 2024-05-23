@@ -2,30 +2,13 @@
 
 import { auth } from "@/auth";
 
-import { hash } from "bcryptjs";
+import { Prisma } from "@prisma/client";
 
 import prisma from "@/lib/prisma";
-
-import { Prisma } from "@prisma/client";
+import { hashPassword } from "@/lib/password";
 
 export async function getSettlements(include: Prisma.SettlementInclude = {}, where: Prisma.SettlementWhereInput = {}) {
   return await prisma.settlement.findMany({ include, where });
-}
-
-// TODO update to restrict access
-export async function updatePassword(settlementId: string, password: { plain: string } | { hash: string | null }) {
-  await prisma.settlement.update({
-    where: {
-      id: settlementId
-    },
-    data: {
-      account: {
-        update: {
-          password: "hash" in password ? password.hash : await hash(password.plain, 10),
-        }
-      }
-    },
-  });
 }
 
 export async function updateOwnPassword(password: { plain: string } | { hash: string | null }) {
@@ -42,7 +25,7 @@ export async function updateOwnPassword(password: { plain: string } | { hash: st
     data: {
       account: {
         update: {
-          password: "hash" in password ? password.hash : await hash(password.plain, 10),
+          password: "hash" in password ? password.hash : await hashPassword(password.plain),
         }
       }
     },

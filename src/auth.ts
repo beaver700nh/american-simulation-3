@@ -5,7 +5,7 @@ import { compare } from "bcryptjs";
 
 import { authConfig } from "@/auth.config";
 import { LoginSchema, loginSchema } from "@/lib/schema";
-import { getSettlements, updatePassword } from "@/lib/database";
+import { getSettlements } from "@/lib/database";
 
 async function getUser(credentials: LoginSchema) {
   const [settlement] = await getSettlements({ account: true }, { id: credentials.username });
@@ -16,18 +16,13 @@ async function getUser(credentials: LoginSchema) {
 
   const user = {
     name: settlement.id,
-    password: settlement.account.password,
   };
 
-  if (user.password == null) {
-    updatePassword(settlement.id, { plain: credentials.password });
-  }
-  else if (!await compare(credentials.password, user.password)) {
+  if (settlement.account.password != null && !await compare(credentials.password, settlement.account.password)) {
     throw Object.assign(new CredentialsSignin("Incorrect username or password"), { source: "password" });
   }
 
-  const { password: _, ...profile } = user;
-  return profile satisfies User;
+  return user satisfies User;
 }
 
 export const {
