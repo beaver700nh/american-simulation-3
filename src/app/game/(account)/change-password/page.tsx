@@ -5,9 +5,9 @@ import { FormEventHandler, useMemo } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { updateOwnPassword } from "@/lib/database";
+import PasswordInput from "@/app/components/password-input";
 
 // TODO:
-// - make password input have eye (make component)
 // - put password length limit on password change too
 // - make form clear on these actions below
 
@@ -39,9 +39,8 @@ export default function ChangePassword() {
         className="gap-2 flex flex-col"
         onSubmit={changePassword}
       >
-        <TextField
+        <PasswordInput
           label="New Password"
-          type="password"
           name="password"
           fullWidth
         />

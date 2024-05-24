@@ -12,7 +12,8 @@ import { Button, Icon, MenuItem, TextField, Typography, alpha, useTheme } from "
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { login } from "@/lib/auth-actions";
 
-import SettlementList from "@/app/components/settlement-select";
+import SettlementSelect from "@/app/components/settlement-select";
+import PasswordInput from "@/app/components/password-input";
 
 // TODO:
 // - declarative routing
@@ -73,7 +74,7 @@ export default function LoginForm() {
         >
           Sign In
         </Typography>
-        <SettlementList
+        <SettlementSelect
           sx={{ gridColumn: "1 / span 2" }}
           className="!mt-4"
           label="Settlement"
@@ -84,10 +85,8 @@ export default function LoginForm() {
           error={!!errors.username}
           helperText={errors.username?.message}
         />
-        <TextField
+        <PasswordInput
           sx={{ gridColumn: "1 / span 2" }}
-          label="Password"
-          type="password"
           name="password"
           inputProps={register("password")}
           fullWidth
