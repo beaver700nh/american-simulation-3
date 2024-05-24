@@ -29,7 +29,7 @@ export default function PasswordInput(props: TextFieldProps) {
             onMouseDown={handleMouseDown}
             edge="end"
           >
-            {visible ? <VisibilityOff /> : <Visibility />}
+            {visible ? <Visibility /> : <VisibilityOff />}
           </IconButton>
         </InputAdornment>,
         ...props.InputProps,

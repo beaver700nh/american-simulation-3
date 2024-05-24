@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button, Icon, MenuItem, TextField, Typography, alpha, useTheme } from "@mui/material";
+import { Button, Icon, Typography, alpha, useTheme } from "@mui/material";
 
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { login } from "@/lib/auth-actions";
@@ -105,7 +105,10 @@ export default function LoginForm() {
           Go!
         </Button>
         {errors.root && <Typography
-          sx={{ gridColumn: "1 / span 2", color: theme.palette.error.main }}
+          sx={{
+            gridColumn: "1 / span 2",
+            color: theme.palette.error.main,
+          }}
           className="w-full !-my-2"
           variant="caption"
         >
