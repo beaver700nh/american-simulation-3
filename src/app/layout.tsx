@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { CssBaseline, PaletteMode } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 import ThemeManager from "@/app/contexts/theme-manager";
@@ -10,7 +10,7 @@ import SessionManager from "@/app/contexts/session-manager";
 import GameMetadataManager from "@/app/contexts/game-metadata-manager";
 import GlobalNav from "@/app/components/global-nav";
 
-import "./globals.css";
+import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,9 +32,18 @@ export default function RootLayout({
       lang="en"
     >
       <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta
+          name="mobile-web-app-capable"
+          content="yes"
+        />
       </head>
       <body
         className={`fixed inset-0 flex flex-col overflow-auto ${inter.className}`}

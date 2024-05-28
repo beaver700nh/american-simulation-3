@@ -3,6 +3,9 @@
 prisma/database.db
 prisma/*.db-journal
 
+# million
+.million
+
 # dependencies
 /node_modules
 /.pnp

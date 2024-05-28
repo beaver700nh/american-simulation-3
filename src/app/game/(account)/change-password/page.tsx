@@ -5,7 +5,8 @@ import { Typography } from "@mui/material";
 import ChangeForm from "@/app/game/(account)/change-password/components/change-form";
 import ResetForm from "@/app/game/(account)/change-password/components/reset-form";
 
-// TODO: maybe refactor to reduce duplication between 3 forms
+// TODO:
+// - maybe refactor to reduce duplication between 3 forms
 
 export default function ChangePassword() {
   return (
