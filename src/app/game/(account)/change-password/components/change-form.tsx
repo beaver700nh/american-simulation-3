@@ -11,6 +11,7 @@ import { ChangeSchema, changeSchema } from "@/lib/schema";
 
 import { updateOwnPassword } from "@/lib/database";
 import PasswordInput from "@/app/components/password-input";
+import { redirect } from "next/navigation";
 
 export default function ChangePasswordChangeForm() {
   const theme = useTheme();
@@ -18,14 +19,16 @@ export default function ChangePasswordChangeForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ChangeSchema>({
     resolver: zodResolver(changeSchema),
   });
 
   const onSubmit = useMemo(() => async (data: ChangeSchema) => {
-    updateOwnPassword({ plain: data.newPassword });
-  }, []);
+    setValue("newPassword", "");
+    await updateOwnPassword({ plain: data.newPassword });
+  }, [setValue]);
 
   return (
     <form

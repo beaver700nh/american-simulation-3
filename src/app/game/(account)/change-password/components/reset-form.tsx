@@ -10,6 +10,7 @@ import { Button, Typography, useTheme } from "@mui/material";
 import { ResetSchema, resetSchema } from "@/lib/schema";
 
 import { updateOwnPassword } from "@/lib/database";
+import { redirect } from "next/navigation";
 
 export default function ChangePasswordResetForm() {
   const theme = useTheme();
@@ -22,7 +23,7 @@ export default function ChangePasswordResetForm() {
   });
 
   const onSubmit = useMemo(() => async (_: ResetSchema) => {
-    updateOwnPassword({ hash: null });
+    await updateOwnPassword({ hash: null });
   }, []);
 
   return (
