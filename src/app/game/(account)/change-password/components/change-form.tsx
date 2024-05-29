@@ -2,51 +2,38 @@
 
 import { useMemo } from "react";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormReturn } from "react-hook-form";
 
 import { Button, Typography, useTheme } from "@mui/material";
 
 import { ChangeSchema, changeSchema } from "@/lib/schema";
 
 import { updateOwnPassword } from "@/lib/database";
+import ZodForm from "@/app/components/zod-form";
 import PasswordInput from "@/app/components/password-input";
-import { redirect } from "next/navigation";
 
 export default function ChangePasswordChangeForm() {
-  const theme = useTheme();
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<ChangeSchema>({
-    resolver: zodResolver(changeSchema),
-  });
-
-  const onSubmit = useMemo(() => async (data: ChangeSchema) => {
-    setValue("newPassword", "");
+  const onSubmit = useMemo(() => (meta: UseFormReturn<ChangeSchema>) => async (data: ChangeSchema) => {
+    meta.setValue("newPassword", "");
     await updateOwnPassword({ plain: data.newPassword });
-  }, [setValue]);
+  }, []);
 
   return (
-    <form
-      className="gap-2 flex flex-col"
-      onSubmit={handleSubmit(onSubmit)}
+    <ZodForm
+      schema={changeSchema}
+      onSubmit={onSubmit}
+      formProps={{
+        className: "gap-2 flex flex-col",
+      }}
     >
       <PasswordInput
         label="New Password"
-        name="password"
-        inputProps={register("newPassword")}
+        name="newPassword"
         fullWidth
-        error={!!errors.newPassword}
-        helperText={errors.newPassword?.message}
       />
       <Button
         variant="contained"
         type="submit"
-        disabled={isSubmitting}
         disableElevation
         fullWidth
       >
@@ -57,15 +44,6 @@ export default function ChangePasswordChangeForm() {
       >
         You will be able to log in with the new password.
       </Typography>
-      {errors.root && <Typography
-        sx={{
-          color: theme.palette.error.main,
-        }}
-        className="w-full !-my-2"
-        variant="caption"
-      >
-        {errors.root.message}
-      </Typography>}
-    </form>
+    </ZodForm>
   );
 }
