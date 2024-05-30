@@ -1,19 +1,22 @@
 "use client";
 
-import { Children, ReactNode, cloneElement, isValidElement } from "react";
+import { Children, ComponentProps, ReactNode, cloneElement, isValidElement } from "react";
 
 import { FieldErrors, FieldPath, UseFormReturn, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TypeOf, ZodType } from "zod";
 
-import { Typography, useTheme } from "@mui/material";
+import { Typography, TypographyProps, useTheme } from "@mui/material";
+
+type FormProps = ComponentProps<"form">;
 
 type ZodFormProps<SchemaType extends ZodType> = {
   children: ReactNode;
   schema: TypeOf<SchemaType>;
   onSubmit: (meta: UseFormReturn<TypeOf<SchemaType>>) => (data: TypeOf<SchemaType>) => Promise<void>;
-  formProps?: React.HTMLProps<HTMLFormElement>;
+  formProps?: FormProps;
+  errorProps?: TypographyProps;
 };
 
 export default function ZodForm<SchemaType extends ZodType>({
@@ -21,6 +24,7 @@ export default function ZodForm<SchemaType extends ZodType>({
   schema,
   onSubmit,
   formProps,
+  errorProps,
 }: ZodFormProps<SchemaType>) {
   const theme = useTheme();
 
@@ -70,9 +74,10 @@ export default function ZodForm<SchemaType extends ZodType>({
       {errors.root && <Typography
         sx={{
           color: theme.palette.error.main,
+          ...errorProps?.sx,
         }}
-        className="w-full !-my-2"
         variant="caption"
+        {...errorProps}
       >
         {errors.root.message}
       </Typography>}

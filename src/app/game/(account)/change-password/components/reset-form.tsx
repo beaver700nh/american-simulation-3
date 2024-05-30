@@ -9,10 +9,11 @@ import { Button, Typography } from "@mui/material";
 import { ChangeSchema, ResetSchema, resetSchema } from "@/lib/schema";
 
 import { updateOwnPassword } from "@/lib/database";
+
 import ZodForm from "@/app/components/zod-form";
 
 export default function ChangePasswordResetForm() {
-  const onSubmit = useMemo(() => (meta: UseFormReturn<ChangeSchema>) => async (_: ResetSchema) => {
+  const onSubmit = useMemo(() => (_: UseFormReturn<ChangeSchema>) => async (_: ResetSchema) => {
     await updateOwnPassword({ hash: null });
   }, []);
 
@@ -21,7 +22,10 @@ export default function ChangePasswordResetForm() {
       schema={resetSchema}
       onSubmit={onSubmit}
       formProps={{
-        className: "gap-2 flex flex-col"
+        className: "gap-2 flex flex-col",
+      }}
+      errorProps={{
+        className: "w-full !-my-2"
       }}
     >
       <Button

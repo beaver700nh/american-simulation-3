@@ -4,14 +4,14 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormReturn } from "react-hook-form";
 
 import { Button, Icon, Typography, alpha, useTheme } from "@mui/material";
 
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { login } from "@/lib/auth-actions";
 
+import ZodForm from "@/app/components/zod-form";
 import SettlementSelect from "@/app/components/settlement-select";
 import PasswordInput from "@/app/components/password-input";
 
@@ -23,37 +23,37 @@ export default function LoginForm() {
   const theme = useTheme();
   const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const onSubmit = useMemo(() => async (data: LoginSchema) => {
+  const onSubmit = useMemo(() => (meta: UseFormReturn<LoginSchema>) => async (data: LoginSchema) => {
     const result = await login(data);
     if (!result.success) {
-      setError(result.error!.source as any, { message: result.error!.message });
+      meta.setError(result.error!.source as any, { message: result.error!.message });
     }
 
     router.refresh();
-  }, [setError, router]);
+  }, [router]);
 
   return (
     <div
       className="absolute inset-0 flex p-2 overflow-auto"
     >
-      <form
-        style={{
-          width: "calc(25lvw + 25lvh)",
-          backgroundColor: alpha(theme.palette.background.default, 0.75),
-          gridTemplateRows: "repeat(auto-fit, min-content)",
-          gridTemplateColumns: "min-content 1fr",
+      <ZodForm
+        schema={loginSchema}
+        onSubmit={onSubmit}
+        formProps={{
+          style: {
+            width: "calc(25lvw + 25lvh)",
+            backgroundColor: alpha(theme.palette.background.default, 0.75),
+            gridTemplateRows: "repeat(auto-fit, min-content)",
+            gridTemplateColumns: "min-content 1fr",
+          },
+          className: "!min-w-min !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg shadow-2xl",
         }}
-        className="!min-w-min !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg shadow-2xl"
-        onSubmit={handleSubmit(onSubmit)}
+        errorProps={{
+          sx: {
+            gridColumn: "1 / span 2",
+          },
+          className: "w-full !-my-2",
+        }}
       >
         <Icon
           sx={{ gridColumn: "1" }}
@@ -79,42 +79,25 @@ export default function LoginForm() {
           className="!mt-4"
           label="Settlement"
           name="username"
-          inputProps={register("username")}
           InputLabelProps={{ shrink: true }}
           fullWidth
-          error={!!errors.username}
-          helperText={errors.username?.message}
         />
         <PasswordInput
           sx={{ gridColumn: "1 / span 2" }}
           name="password"
-          inputProps={register("password")}
           fullWidth
-          error={!!errors.password}
-          helperText={errors.password?.message}
         />
         <Button
           sx={{ gridColumn: "1 / span 2" }}
           className="!normal-case"
           variant="contained"
           type="submit"
-          disabled={isSubmitting}
           disableElevation
           fullWidth
         >
           Go!
         </Button>
-        {errors.root && <Typography
-          sx={{
-            gridColumn: "1 / span 2",
-            color: theme.palette.error.main,
-          }}
-          className="w-full !-my-2"
-          variant="caption"
-        >
-          {errors.root.message}
-        </Typography>}
-      </form>
+      </ZodForm>
     </div>
   )
 }
