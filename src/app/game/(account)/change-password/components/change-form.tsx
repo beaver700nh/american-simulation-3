@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { UseFormReturn } from "react-hook-form";
 
-import { Button, Typography, useTheme } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import { ChangeSchema, changeSchema } from "@/lib/schema";
 

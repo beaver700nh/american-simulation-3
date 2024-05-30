@@ -5,14 +5,14 @@ import { Children, ReactNode, cloneElement, isValidElement } from "react";
 import { FieldErrors, FieldPath, UseFormReturn, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ZodType } from "zod";
+import { TypeOf, ZodType } from "zod";
 
 import { Typography, useTheme } from "@mui/material";
 
 type ZodFormProps<SchemaType extends ZodType> = {
   children: ReactNode;
-  schema: SchemaType;
-  onSubmit: (meta: UseFormReturn<SchemaType>) => (data: SchemaType) => Promise<void>;
+  schema: TypeOf<SchemaType>;
+  onSubmit: (meta: UseFormReturn<TypeOf<SchemaType>>) => (data: TypeOf<SchemaType>) => Promise<void>;
   formProps?: React.HTMLProps<HTMLFormElement>;
 };
 
@@ -24,7 +24,7 @@ export default function ZodForm<SchemaType extends ZodType>({
 }: ZodFormProps<SchemaType>) {
   const theme = useTheme();
 
-  const formControls = useForm<SchemaType>({
+  const formControls = useForm<typeof schema>({
     resolver: zodResolver(schema),
   });
 
@@ -54,11 +54,12 @@ export default function ZodForm<SchemaType extends ZodType>({
         }
 
         if (name != null) {
-          type ErrorKey = keyof FieldErrors<SchemaType>;
+          type RegisterKey = FieldPath<typeof schema>;
+          type ErrorKey = keyof FieldErrors<typeof schema>;
 
           return cloneElement(child, {
             ...child.props,
-            inputProps: register(name as FieldPath<SchemaType>),
+            inputProps: register(name as RegisterKey),
             error: !!errors[name as ErrorKey],
             helperText: errors[name as ErrorKey]?.message,
           });
