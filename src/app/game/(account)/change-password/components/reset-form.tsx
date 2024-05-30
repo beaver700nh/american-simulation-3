@@ -2,39 +2,31 @@
 
 import { useMemo } from "react";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormReturn } from "react-hook-form";
 
-import { Button, Typography, useTheme } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
-import { ResetSchema, resetSchema } from "@/lib/schema";
+import { ChangeSchema, ResetSchema, resetSchema } from "@/lib/schema";
 
 import { updateOwnPassword } from "@/lib/database";
-import { redirect } from "next/navigation";
+import ZodForm from "@/app/components/zod-form";
 
 export default function ChangePasswordResetForm() {
-  const theme = useTheme();
-
-  const {
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ResetSchema>({
-    resolver: zodResolver(resetSchema),
-  });
-
-  const onSubmit = useMemo(() => async (_: ResetSchema) => {
+  const onSubmit = useMemo(() => (meta: UseFormReturn<ChangeSchema>) => async (_: ResetSchema) => {
     await updateOwnPassword({ hash: null });
   }, []);
 
   return (
-    <form
-      className="gap-2 flex flex-col"
-      onSubmit={handleSubmit(onSubmit)}
+    <ZodForm
+      schema={resetSchema}
+      onSubmit={onSubmit}
+      formProps={{
+        className: "gap-2 flex flex-col"
+      }}
     >
       <Button
         variant="outlined"
         type="submit"
-        disabled={isSubmitting}
         disableElevation
         fullWidth
       >
@@ -46,15 +38,6 @@ export default function ChangePasswordResetForm() {
         Anyone will be able to log in and set your password.<br />
         Your account data will be preserved.
       </Typography>
-      {errors.root && <Typography
-        sx={{
-          color: theme.palette.error.main,
-        }}
-        className="w-full !-my-2"
-        variant="caption"
-      >
-        {errors.root.message}
-      </Typography>}
-    </form>
+    </ZodForm>
   );
 }
