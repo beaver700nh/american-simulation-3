@@ -4,7 +4,7 @@ import { Box, List, SwipeableDrawer, Toolbar } from "@mui/material";
 import { Article, House, Map, Security, Settings } from "@mui/icons-material";
 
 import { useSidebar } from "@/app/contexts/sidebar-manager";
-import SidebarTab from "@/app/game/components/sidebar-tab";
+import SidebarTab from "../components/sidebar-tab";
 
 const tabs = [
   {

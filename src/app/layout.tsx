@@ -8,7 +8,8 @@ import ThemeManager from "@/app/contexts/theme-manager";
 import SidebarManager from "@/app/contexts/sidebar-manager";
 import SessionManager from "@/app/contexts/session-manager";
 import GameMetadataManager from "@/app/contexts/game-metadata-manager";
-import GlobalNav from "@/app/components/global-nav";
+
+import GlobalNav from "./components/global-nav";
 
 import "@/app/globals.css";
 

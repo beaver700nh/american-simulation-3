@@ -4,6 +4,8 @@ import { auth } from "@/auth";
 import { formatSettlementName } from "@/lib/string-format";
 import { getSettlements } from "@/lib/database";
 
+import CyclingMaps from "./components/cycling-maps";
+
 export default async function Home() {
   const session = await auth();
   const [settlement] = await getSettlements({}, { id: session?.user?.name ?? undefined });
@@ -12,8 +14,12 @@ export default async function Home() {
     <Box
       className="grow flex relative"
     >
+      <CyclingMaps />
       <Stack
         className="m-auto p-10 text-center"
+        sx={{
+          filter: "drop-shadow(0 0 1rem black)",
+        }}
       >
         <Typography
           variant="h4"

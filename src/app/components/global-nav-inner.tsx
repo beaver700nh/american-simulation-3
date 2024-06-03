@@ -3,13 +3,15 @@
 import { useMemo } from "react";
 import Link from "next/link";
 
+import { Session } from "next-auth";
+
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
 import { LightMode, DarkMode, Menu } from "@mui/icons-material";
 
-import AccountMenu from "@/app/components/account-menu";
 import { useColorMode } from "@/app/contexts/theme-manager";
 import { useSidebar } from "@/app/contexts/sidebar-manager";
-import { Session } from "next-auth";
+
+import AccountMenu from "../components/account-menu";
 
 type GlobalNavInnerProps = {
   session: Session | null;
