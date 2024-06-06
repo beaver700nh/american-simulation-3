@@ -25,7 +25,7 @@ export default function ThemeManager({
       (window.localStorage.getItem("color-mode") as PaletteMode) ??
       (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light")
     );
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (mode == null) return;
