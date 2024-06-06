@@ -7,7 +7,9 @@ import { FieldErrors, FieldPath, UseFormReturn, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TypeOf, ZodType } from "zod";
 
-import { Typography, TypographyProps, useTheme } from "@mui/material";
+import { Typography, TypographyProps } from "@mui/material";
+
+import { useErrorColor } from "@/lib/theme-sx";
 
 type FormProps = ComponentProps<"form">;
 
@@ -26,7 +28,7 @@ export default function ZodForm<SchemaType extends ZodType>({
   formProps,
   errorProps,
 }: ZodFormProps<SchemaType>) {
-  const theme = useTheme();
+  const sxErrorColor = useErrorColor();
 
   const formControls = useForm<typeof schema>({
     resolver: zodResolver(schema),
@@ -73,7 +75,7 @@ export default function ZodForm<SchemaType extends ZodType>({
       })}
       {errors.root && <Typography
         sx={{
-          color: theme.palette.error.main,
+          ...sxErrorColor,
           ...errorProps?.sx,
         }}
         variant="caption"

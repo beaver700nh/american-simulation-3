@@ -6,10 +6,11 @@ import Image from "next/image";
 
 import { UseFormReturn } from "react-hook-form";
 
-import { Button, Icon, Typography, alpha, useTheme } from "@mui/material";
+import { Button, Icon, Typography } from "@mui/material";
 
 import { LoginSchema, loginSchema } from "@/lib/schema";
 import { login } from "@/lib/auth-actions";
+import { useBackgroundColor, useDropShadow } from "@/lib/theme-sx";
 
 import ZodForm from "@/app/components/zod-form";
 import SettlementSelect from "@/app/components/settlement-select";
@@ -20,8 +21,9 @@ import PasswordInput from "@/app/components/password-input";
 // - strict mode
 
 export default function LoginForm() {
-  const theme = useTheme();
   const router = useRouter();
+  const sxBackgroundColor = useBackgroundColor(0.75);
+  const sxDropShadow = useDropShadow();
 
   const onSubmit = useMemo(() => (meta: UseFormReturn<LoginSchema>) => async (data: LoginSchema) => {
     const result = await login(data);
@@ -42,11 +44,12 @@ export default function LoginForm() {
         formProps={{
           style: {
             width: "calc(25lvw + 25lvh)",
-            backgroundColor: alpha(theme.palette.background.default, 0.75),
             gridTemplateRows: "repeat(auto-fit, min-content)",
             gridTemplateColumns: "min-content 1fr",
+            ...sxBackgroundColor,
+            ...sxDropShadow,
           },
-          className: "!min-w-min !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg shadow-2xl",
+          className: "!min-w-min !m-auto p-8 gap-4 grid justify-items-start items-center border-2 rounded-lg",
         }}
         errorProps={{
           sx: {

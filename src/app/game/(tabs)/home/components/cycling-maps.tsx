@@ -17,14 +17,15 @@ export default function CyclingMaps() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval((function next() {
       setCurrent(Math.floor(Math.random() * names.length));
-    }, 10000);
+      return next;
+    })(), 10000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [names.length]);
+  }, [names]);
 
   return (
     <Stack
@@ -51,9 +52,6 @@ export default function CyclingMaps() {
       </Fade>)}
       <Typography
         className="absolute right-0 bottom-0 !m-3 opacity-25"
-        sx={{
-          filter: "drop-shadow(0 0 0.5rem black)",
-        }}
         variant="caption"
       >
         {
