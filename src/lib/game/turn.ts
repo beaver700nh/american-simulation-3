@@ -3,5 +3,5 @@
 import { Turn } from "@/lib/definitions";
 
 export async function getCurrentTurn(): Promise<Turn> {
-  return 1870;
+  return 1860;
 }
