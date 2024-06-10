@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useMemo } from "react";
 
-import { Divider, IconButton, Stack } from "@mui/material";
+import { Divider, IconButton, MenuItem, Stack, TextField } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from "@mui/icons-material";
 
 import { TurnValues } from "@/lib/definitions";
@@ -33,10 +33,18 @@ export default function TurnSelect({
     [setIndex, max],
   );
 
+  const handleSelect = useMemo(
+    () => (event: React.ChangeEvent<HTMLInputElement>) => {
+      // No bounds check necessary, just trust the Select to provide valid values
+      setIndex(parseInt(event.target.value, 10));
+    },
+    [setIndex],
+  );
+
   return (
     <Stack
       direction="row"
-      className="justify-stretch p-1"
+      className="justify-stretch items-center p-1"
     >
       <IconButton
         size="small"
@@ -51,9 +59,23 @@ export default function TurnSelect({
         <KeyboardArrowLeft />
       </IconButton>
       <Divider
-        className="grow items-center !mx-2"
+        className="grow !mx-2"
       >
-        { TurnValues[index] }
+        <TextField
+          variant="standard"
+          value={index}
+          onChange={handleSelect}
+          select
+        >
+          {TurnValues
+            .filter((_, index) => index <= max)
+            .map((turn, index) => <MenuItem
+              key={index}
+              value={index}
+            >
+              {turn}
+          </MenuItem>)}
+        </TextField>
       </Divider>
       <IconButton
         size="small"

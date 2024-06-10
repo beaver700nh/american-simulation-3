@@ -6,13 +6,13 @@ import { Box } from "@mui/material";
 
 import TurnSelect from "@/app/components/turn-select";
 
-type InnerProps = {
+type WrapperProps = {
   maxTurn: number;
 };
 
-export default function Inner({
+export default function Wrapper({
   maxTurn,
-}: InnerProps) {
+}: WrapperProps) {
   const turn = useState(maxTurn);
 
   return (
