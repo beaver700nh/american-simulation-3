@@ -4,12 +4,10 @@ import { useState } from "react";
 
 import { Box } from "@mui/material";
 
-import { Turn } from "@/lib/definitions";
-
 import TurnSelect from "@/app/components/turn-select";
 
 type InnerProps = {
-  maxTurn: Turn;
+  maxTurn: number;
 };
 
 export default function Inner({

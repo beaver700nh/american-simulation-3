@@ -1,3 +1,4 @@
+import { TurnValues } from "@/lib/definitions";
 import { getCurrentTurn } from "@/lib/game/turn";
 
 import Inner from "./components/inner";
@@ -7,7 +8,7 @@ export default async function SettlementSheet() {
 
   return (
     <Inner
-      maxTurn={turn}
+      maxTurn={TurnValues.indexOf(turn)}
     />
   );
 }

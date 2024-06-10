@@ -5,32 +5,32 @@ import { Dispatch, SetStateAction, useMemo } from "react";
 import { Divider, IconButton, Stack } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from "@mui/icons-material";
 
-import { Turn, TurnValues } from "@/lib/definitions";
+import { TurnValues } from "@/lib/definitions";
 
 type TurnSelectProps = {
-  state: [Turn, Dispatch<SetStateAction<Turn>>];
-  max: Turn;
+  state: [number, Dispatch<SetStateAction<number>>];
+  max: number;
 };
 
 export default function TurnSelect({
-  state: [turn, setTurn],
+  state: [index, setIndex],
   max,
 }: TurnSelectProps) {
   const handleMin = useMemo(
-    () => () => setTurn(TurnValues[0]),
-    [setTurn],
+    () => () => setIndex(0),
+    [setIndex],
   );
   const handleMax = useMemo(
-    () => () => setTurn(TurnValues[TurnValues.length - 1]),
-    [setTurn],
+    () => () => setIndex(max),
+    [setIndex, max],
   );
   const handleDec = useMemo(
-    () => () => setTurn(turn => TurnValues[Math.max(0, TurnValues.indexOf(turn) - 1)]),
-    [setTurn],
+    () => () => setIndex(index => Math.max(0, index - 1)),
+    [setIndex],
   );
   const handleInc = useMemo(
-    () => () => setTurn(turn => TurnValues[Math.min(TurnValues.length, TurnValues.indexOf(turn) + 1)]),
-    [setTurn],
+    () => () => setIndex(index => Math.min(max, index + 1)),
+    [setIndex, max],
   );
 
   return (
@@ -53,7 +53,7 @@ export default function TurnSelect({
       <Divider
         className="grow items-center !mx-2"
       >
-        { turn }
+        { TurnValues[index] }
       </Divider>
       <IconButton
         size="small"
