@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { Prisma, Settlement } from "@prisma/client";
 
-import { getSettlements } from "@/lib/database";
+import { getSettlements } from "@/lib/game/settlement";
 
 type GameMetadataContext = {
 };

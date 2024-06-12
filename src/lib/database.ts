@@ -2,14 +2,8 @@
 
 import { auth } from "@/auth";
 
-import { Prisma } from "@prisma/client";
-
 import prisma from "@/lib/prisma";
 import { hashPassword } from "@/lib/password";
-
-export async function getSettlements(include: Prisma.SettlementInclude = {}, where: Prisma.SettlementWhereInput = {}) {
-  return await prisma.settlement.findMany({ include, where });
-}
 
 export async function updateOwnPassword(password: { plain: string } | { hash: string | null }) {
   const session = await auth();

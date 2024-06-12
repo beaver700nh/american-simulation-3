@@ -30,3 +30,14 @@ export const TurnValues = [
 ] as const;
 
 export type Turn = typeof TurnValues[number];
+
+export type SettlementSheetDatum = {
+  name: string;
+  label: string;
+  value: any;
+};
+
+export type SettlementSheetData = {
+  turn: Turn;
+  data: SettlementSheetDatum[];
+};

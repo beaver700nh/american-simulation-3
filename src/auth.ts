@@ -5,7 +5,7 @@ import { compare } from "bcryptjs";
 
 import { authConfig } from "@/auth.config";
 import { LoginSchema, loginSchema } from "@/lib/schema";
-import { getSettlements } from "@/lib/database";
+import { getSettlements } from "@/lib/game/settlement";
 
 async function getUser(credentials: LoginSchema) {
   const [settlement] = await getSettlements({ account: true }, { id: credentials.username });

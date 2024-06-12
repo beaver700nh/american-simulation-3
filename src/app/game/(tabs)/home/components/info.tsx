@@ -2,8 +2,8 @@ import { Divider, Typography } from "@mui/material";
 
 import { auth } from "@/auth";
 
-import { getSettlements } from "@/lib/database";
 import { formatSettlementName } from "@/lib/string-format";
+import { getSettlements } from "@/lib/game/settlement";
 
 import InfoOuter from "../components/info-outer";
 
