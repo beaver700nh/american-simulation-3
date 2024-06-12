@@ -9,13 +9,15 @@ import { TurnValues } from "@/lib/definitions";
 
 type TurnSelectProps = {
   state: [number, Dispatch<SetStateAction<number>>];
-  max: number;
+  max: number | null;
 };
 
 export default function TurnSelect({
   state: [index, setIndex],
   max,
 }: TurnSelectProps) {
+  max = max ?? TurnValues.length - 1;
+
   const handleMin = useMemo(
     () => () => setIndex(0),
     [setIndex],
@@ -42,9 +44,8 @@ export default function TurnSelect({
   );
 
   return (
-    <Stack
-      direction="row"
-      className="justify-stretch items-center p-1"
+    <nav
+      className="flex flex-row justify-stretch items-center p-1 shadow-md"
     >
       <IconButton
         size="small"
@@ -89,6 +90,6 @@ export default function TurnSelect({
       >
         <KeyboardDoubleArrowRight />
       </IconButton>
-    </Stack>
+    </nav>
   );
 }

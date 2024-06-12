@@ -8,7 +8,6 @@ import ThemeManager from "@/app/contexts/theme-manager";
 import SidebarManager from "@/app/contexts/sidebar-manager";
 import SessionManager from "@/app/contexts/session-manager";
 import GameMetadataManager from "@/app/contexts/game-metadata-manager";
-import TurnManager from "@/app/contexts/turn-manager";
 
 import GlobalNav from "./components/global-nav";
 
@@ -55,15 +54,13 @@ export default function RootLayout({
           <SidebarManager>
           <SessionManager>
           <GameMetadataManager>
-          <TurnManager>
             <CssBaseline />
             <GlobalNav />
             <main
-              className="flex flex-col grow"
+              className="flex flex-col grow relative"
             >
               {children}
             </main>
-          </TurnManager>
           </GameMetadataManager>
           </SessionManager>
           </SidebarManager>

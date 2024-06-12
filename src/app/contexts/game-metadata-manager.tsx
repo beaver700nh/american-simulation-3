@@ -44,11 +44,8 @@ export function useSettlements(include: Prisma.SettlementInclude = {}) {
   const [data, setData] = useState<Settlement[]>([]);
 
   useEffect(() => {
-    getSettlements(include)
-    .then(settlements => {
-      setData(settlements);
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    getSettlements(include).then(setData);
+  }, [include]);
 
   return data;
 }

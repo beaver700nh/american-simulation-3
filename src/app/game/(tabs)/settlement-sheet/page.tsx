@@ -1,14 +1,10 @@
-import { TurnValues } from "@/lib/definitions";
-import { getCurrentTurn } from "@/lib/game/turn";
-
 import Wrapper from "./components/wrapper";
+import Inner from "./components/inner";
 
 export default async function SettlementSheet() {
-  const turn = await getCurrentTurn();
-
   return (
-    <Wrapper
-      maxTurn={TurnValues.indexOf(turn)}
-    />
+    <Wrapper>
+      <Inner />
+    </Wrapper>
   );
 }
