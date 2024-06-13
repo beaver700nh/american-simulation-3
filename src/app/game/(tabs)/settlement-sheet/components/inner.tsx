@@ -1,47 +1,13 @@
 "use client";
 
-import { CSSProperties, Fragment } from "react";
+import { Fragment } from "react";
 
 import { Box, Paper } from "@mui/material";
 
 import { SettlementSheetData } from "@/lib/definitions";
+import { style } from "./style";
 
 import { useViewingTurn } from "../components/turn-context";
-
-type GridPosition = {
-  rs: number;
-  cs: number;
-  re: number;
-  ce: number;
-};
-
-type CellProperties = {
-  position: GridPosition;
-  style: CSSProperties;
-};
-
-const arrangement: {
-  [key: string]: {
-    label: CellProperties;
-    value: CellProperties;
-  },
-} = {
-  "earnings": {
-    label: {
-      position: { rs: 1, cs: 4, re: 3, ce: 6 },
-      style: {
-        fontSize: "160%",
-      },
-    },
-    value: {
-      position: { rs: 1, cs: 6, re: 3, ce: 8 },
-      style: {
-        fontSize: "160%",
-        fontStyle: "italic",
-      },
-    },
-  }
-};
 
 type InnerProps = {
   data: SettlementSheetData[];
@@ -74,7 +40,7 @@ export default function Inner({
           }}
         >
           {sheet?.data.map(({ name, label, value }) => {
-            const cfg = arrangement[name];
+            const cfg = style[name];
 
             if (cfg == null) {
               return null;
@@ -87,18 +53,14 @@ export default function Inner({
               key={name}
           >
             <span
-              style={{
-                ...cfg.label.style,
-                gridArea: `${l.rs} / ${l.cs} / ${l.re} / ${l.ce}`,
-              }}
+              className="flex justify-center items-center"
+              style={cfg.label}
             >
               {label}
             </span>
             <span
-              style={{
-                ...cfg.value.style,
-                gridArea: `${v.rs} / ${v.cs} / ${v.re} / ${v.ce}`,
-              }}
+              className="flex justify-center items-center"
+              style={cfg.value}
             >
               {value ?? "#ERR!"}
             </span>
