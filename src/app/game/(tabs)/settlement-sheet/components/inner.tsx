@@ -1,16 +1,14 @@
 "use client";
 
-import { Fragment } from "react";
-
 import { Box, Paper } from "@mui/material";
 
-import { SettlementSheetData } from "@/lib/definitions";
-import { style } from "./style";
+import { SettlementSheet } from "@/lib/definitions";
 
 import { useViewingTurn } from "../components/turn-context";
+import Cell from "../components/cell";
 
 type InnerProps = {
-  data: SettlementSheetData[];
+  data: SettlementSheet[];
 };
 
 export default function Inner({
@@ -39,32 +37,7 @@ export default function Inner({
             gridTemplate: "repeat(50, 1fr) / repeat(11, 1fr)",
           }}
         >
-          {sheet?.data.map(({ name, label, value }) => {
-            const cfg = style[name];
-
-            if (cfg == null) {
-              return null;
-            }
-
-            const l = cfg.label.position;
-            const v = cfg.value.position;
-
-          return <Fragment
-              key={name}
-          >
-            <span
-              className="flex justify-center items-center"
-              style={cfg.label}
-            >
-              {label}
-            </span>
-            <span
-              className="flex justify-center items-center"
-              style={cfg.value}
-            >
-              {value ?? "#ERR!"}
-            </span>
-          </Fragment>})}
+          {sheet?.data.map(Cell)}
         </p>
       </Paper>
     </Box>

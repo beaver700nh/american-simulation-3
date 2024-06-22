@@ -40,12 +40,12 @@ export function useGameMetadata() {
   return context;
 }
 
-export function useSettlements(include: Prisma.SettlementInclude = {}) {
+export function useSettlements(include: Prisma.SettlementInclude | null = null) {
   const [data, setData] = useState<Settlement[]>([]);
 
   useEffect(() => {
-    getSettlements(include).then(setData);
-  }, [include]);
+    getSettlements(include ?? {}).then(setData);
+  }, [include, setData]);
 
   return data;
 }

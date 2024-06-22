@@ -1,18 +1,17 @@
 "use server";
 
-import { SettlementSheetData } from "@/lib/definitions";
+import { SettlementSheet } from "@/lib/definitions";
 
-export async function getSettlementSheetData() {
+export async function getSettlementSheet() {
   return [
     {
-      turn: 1759,
+      turn: 1860,
       data: [
         {
           name: "earnings",
           label: "Earnings",
-          value: null,
         },
       ],
     },
-  ] satisfies SettlementSheetData[];
+  ] satisfies SettlementSheet[];
 }

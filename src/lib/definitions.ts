@@ -31,13 +31,21 @@ export const TurnValues = [
 
 export type Turn = typeof TurnValues[number];
 
-export type SettlementSheetDatum = {
-  name: string;
-  label: string;
-  value: any;
+export type SettlementSheet = {
+  turn: Turn;
+  data: SettlementSheetData[];
 };
 
 export type SettlementSheetData = {
-  turn: Turn;
+  name: string;
+  label?: string;
+  value?: SettlementSheetDatum | SettlementSheetTable;
+};
+
+export type SettlementSheetTable = {
+  rows: string[];
+  cols: string[];
   data: SettlementSheetDatum[];
 };
+
+export type SettlementSheetDatum = string | number;
