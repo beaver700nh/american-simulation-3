@@ -1,18 +1,20 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { ReactNode, createContext, useContext } from "react";
 
 import { Turn } from "@/lib/definitions";
 
 const ViewingTurnContext = createContext<Turn | null>(null);
 
+type ViewingTurnProviderProps = {
+  children: ReactNode;
+  turn: Turn | null;
+};
+
 export default function ViewingTurnProvider({
   children,
   turn,
-}: Readonly<{
-  children: React.ReactNode;
-  turn: Turn;
-}>) {
+}: ViewingTurnProviderProps) {
   return (
     <ViewingTurnContext.Provider value={turn}>
       {children}
@@ -23,7 +25,7 @@ export default function ViewingTurnProvider({
 export function useViewingTurn() {
   const context = useContext(ViewingTurnContext);
 
-  if (!context) {
+  if (!context && context !== null) {
     throw new Error("useViewingTurn must be used within a ViewingTurnProvider");
   }
 

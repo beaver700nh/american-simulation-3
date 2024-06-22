@@ -1,21 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { Box, Paper } from "@mui/material";
 
 import { SettlementSheet } from "@/lib/definitions";
+import { getSettlementSheet } from "@/lib/game/settlement-sheet";
 
 import { useViewingTurn } from "../components/turn-context";
 import Cell from "../components/cell";
 
-type InnerProps = {
-  data: SettlementSheet[];
-};
-
-export default function Inner({
-  data,
-}: InnerProps) {
+export default function Inner() {
   const turn = useViewingTurn();
-  const sheet = data.find(sheet => sheet.turn === turn);
+  const [sheet, setSheet] = useState<SettlementSheet | null>(null);
+
+  useEffect(() => {
+    if (turn == null) {
+      return;
+    }
+
+    getSettlementSheet(null, { turn }).then(setSheet);
+  }, [turn]);
 
   return (
     <Box

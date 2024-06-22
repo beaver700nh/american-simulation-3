@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useMemo } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
 
 import { Divider, IconButton, MenuItem, Stack, TextField } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from "@mui/icons-material";
@@ -8,40 +8,33 @@ import { KeyboardArrowLeft, KeyboardArrowRight, KeyboardDoubleArrowLeft, Keyboar
 import { TurnValues } from "@/lib/definitions";
 
 type TurnSelectProps = {
-  state: [number, Dispatch<SetStateAction<number>>];
-  max: number | null;
+  indexState: [number | null, Dispatch<SetStateAction<number | null>>];
+  maxIndex: number | null;
 };
 
 export default function TurnSelect({
-  state: [index, setIndex],
-  max,
+  indexState: [index, setIndex],
+  maxIndex,
 }: TurnSelectProps) {
-  max = max ?? TurnValues.length - 1;
+  useEffect(() => {
+    if (maxIndex != null) {
+      setIndex(maxIndex);
+    }
+  }, [setIndex, maxIndex]);
 
-  const handleMin = useMemo(
-    () => () => setIndex(0),
-    [setIndex],
-  );
-  const handleMax = useMemo(
-    () => () => setIndex(max),
-    [setIndex, max],
-  );
-  const handleDec = useMemo(
-    () => () => setIndex(index => Math.max(0, index - 1)),
-    [setIndex],
-  );
-  const handleInc = useMemo(
-    () => () => setIndex(index => Math.min(max, index + 1)),
-    [setIndex, max],
-  );
+  const handleMin = useMemo(() => () => setIndex(index => index == null ? null : 0),
+    [setIndex]);
+  const handleMax = useMemo(() => () => setIndex(index => index == null ? null : maxIndex),
+    [setIndex, maxIndex]);
+  const handleDec = useMemo(() => () => setIndex(index => index == null ? null : Math.max(0, index - 1)),
+    [setIndex]);
+  const handleInc = useMemo(() => () => setIndex(index => index == null ? null : Math.min(maxIndex!, index + 1)),
+    [setIndex, maxIndex]);
 
-  const handleSelect = useMemo(
-    () => (event: React.ChangeEvent<HTMLInputElement>) => {
-      // No bounds check necessary, just trust the Select to provide valid values
-      setIndex(parseInt(event.target.value, 10));
-    },
-    [setIndex],
-  );
+  const handleSelect = useMemo(() => (event: React.ChangeEvent<HTMLInputElement>) => {
+    // No bounds check necessary, just trust the Select to provide valid values
+    setIndex(parseInt(event.target.value, 10));
+  }, [setIndex]);
 
   return (
     <nav
@@ -62,21 +55,21 @@ export default function TurnSelect({
       <Divider
         className="grow !mx-2"
       >
-        <TextField
+        {index == null ? null : <TextField
           variant="standard"
           value={index}
           onChange={handleSelect}
           select
         >
           {TurnValues
-            .filter((_, index) => index <= max)
+            .filter((_, index) => index <= maxIndex!)
             .map((turn, index) => <MenuItem
               key={index}
               value={index}
             >
               {turn}
           </MenuItem>)}
-        </TextField>
+        </TextField>}
       </Divider>
       <IconButton
         size="small"

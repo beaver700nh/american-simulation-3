@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Box } from "@mui/material";
 
@@ -15,30 +15,21 @@ export default function Wrapper({
 }: Readonly<{
   children?: React.ReactNode;
 }>) {
-  const maxTurn_ = useTurn();
-  const maxTurn = maxTurn_ == null ? null : TurnValues.indexOf(maxTurn_);
+  const maxIndex = (x => x == null ? null : TurnValues.indexOf(x))(useTurn());
 
-  const turnState = useState(0);
-  const [turn, setTurn] = turnState;
-
-  useEffect(() => {
-    if (maxTurn == null) {
-      return;
-    }
-
-    setTurn(maxTurn);
-  }, [setTurn, maxTurn]);
+  const indexState = useState<number | null>(null);
+  const [index] = indexState;
 
   return (
     <Box
       className="absolute inset-0 flex flex-col"
     >
       <TurnSelect
-        state={turnState}
-        max={maxTurn}
+        indexState={indexState}
+        maxIndex={maxIndex}
       />
       <ViewingTurnProvider
-        turn={TurnValues[turn]}
+        turn={index == null ? null : TurnValues[index]}
       >
         {children}
       </ViewingTurnProvider>
