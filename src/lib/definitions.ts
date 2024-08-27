@@ -37,15 +37,27 @@ export type SettlementSheet = {
 };
 
 export type SettlementSheetData = {
-  name: string;
+  name: SettlementSheetName;
   label?: string;
-  value?: SettlementSheetDatum | SettlementSheetTable;
+  value?: SettlementSheetValue | SettlementSheetTable;
 };
+
+export const SettlementSheetNames = [
+  "settlement",
+  "earnings",
+  "turn",
+  "debtToEarnings",
+  "population",
+  "votes",
+  "unrest",
+] as const;
+
+export type SettlementSheetName = typeof SettlementSheetNames[number];
+
+export type SettlementSheetValue = string | number;
 
 export type SettlementSheetTable = {
   rows: string[];
   cols: string[];
-  data: SettlementSheetDatum[];
+  data: SettlementSheetValue[];
 };
-
-export type SettlementSheetDatum = string | number;

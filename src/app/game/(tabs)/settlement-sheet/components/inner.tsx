@@ -4,13 +4,21 @@ import { useState, useEffect } from "react";
 
 import { Box, Paper } from "@mui/material";
 
-import { SettlementSheet } from "@/lib/definitions";
+import { SettlementSheet, SettlementSheetData } from "@/lib/definitions";
 import { getSettlementSheet } from "@/lib/game/settlement-sheet";
+
+import { Settlement } from "@prisma/client";
 
 import { useViewingTurn } from "../components/turn-context";
 import Cell from "../components/cell";
 
-export default function Inner() {
+type InnerProps = {
+  settlement: Settlement;
+};
+
+export default function Inner({
+  settlement,
+}: InnerProps) {
   const turn = useViewingTurn();
   const [sheet, setSheet] = useState<SettlementSheet | null>(null);
 
@@ -42,7 +50,19 @@ export default function Inner() {
             gridTemplate: "repeat(50, 1fr) / repeat(11, 1fr)",
           }}
         >
-          {sheet?.data.map(Cell)}
+          {
+            ([
+              ...(sheet?.data ?? []),
+              {
+                "name": "settlement",
+                "value": settlement.name,
+              },
+              {
+                "name": "turn",
+                "label": "Year",
+              },
+            ] satisfies SettlementSheetData[]).map(Cell)
+          }
         </p>
       </Paper>
     </Box>

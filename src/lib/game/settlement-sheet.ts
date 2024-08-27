@@ -11,11 +11,27 @@ export async function getSettlementSheet(_: unknown, where: { turn?: number } = 
           name: "earnings",
           label: "Earnings",
         },
+        {
+          name: "debtToEarnings",
+          label: "D to E Ratio",
+        },
+        {
+          name: "population",
+          label: "Population",
+        },
+        {
+          name: "votes",
+          label: "Votes",
+        },
+        {
+          name: "unrest",
+          label: "Unrest",
+        },
       ],
     },
   ] satisfies SettlementSheet[];
 
   const result = fake.filter(sheet => sheet.turn === where.turn);
 
-  return result.length === 0 ? null : result[0];
+  return result[0] ?? null;
 }
