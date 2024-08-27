@@ -27,6 +27,34 @@ export async function getSettlementSheet(_: unknown, where: { turn?: number } = 
           name: "unrest",
           label: "Unrest",
         },
+        {
+          name: "propertyRate",
+          label: "Property Rate",
+        },
+        {
+          name: "tariffRate",
+          label: "Tariff Rate",
+        },
+        {
+          name: "exciseRate",
+          label: "Excise Rate",
+        },
+        {
+          name: "plantationValue",
+          label: "Plantation M/V",
+        },
+        {
+          name: "farmingValue",
+          label: "Farming M/V",
+        },
+        {
+          name: "industryValue",
+          label: "Industry M/V",
+        },
+        {
+          name: "commerceValue",
+          label: "Commerce M/V",
+        },
       ],
     },
   ] satisfies SettlementSheet[];

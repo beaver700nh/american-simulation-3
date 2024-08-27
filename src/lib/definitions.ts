@@ -50,6 +50,13 @@ export const SettlementSheetNames = [
   "population",
   "votes",
   "unrest",
+  "propertyRate",
+  "tariffRate",
+  "exciseRate",
+  "plantationValue",
+  "farmingValue",
+  "industryValue",
+  "commerceValue",
 ] as const;
 
 export type SettlementSheetName = typeof SettlementSheetNames[number];

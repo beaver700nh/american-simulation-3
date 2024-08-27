@@ -131,4 +131,78 @@ export const style: StyleType = {
       fontStyle: "normal",
     },
   },
+  "propertyRate": {
+    label: {
+      ...styles.label,
+      gridArea: "7 / 2 / 9 / 4",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "9 / 2 / 11 / 4",
+    },
+  },
+  "tariffRate": {
+    label: {
+      ...styles.label,
+      gridArea: "7 / 6 / 9 / 8",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "9 / 6 / 11 / 8",
+    },
+  },
+  "exciseRate": {
+    label: {
+      ...styles.label,
+      gridArea: "7 / 10 / 9 / 12",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "9 / 10 / 11 / 12",
+    },
+  },
+  "plantationValue": {
+    label: {
+      ...styles.label,
+      gridArea: "11 / 2 / 13 / 4",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "13 / 2 / 15 / 4",
+      fontStyle: "normal",
+    },
+  },
+  "farmingValue": {
+    label: {
+      ...styles.label,
+      gridArea: "11 / 6 / 13 / 8",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "13 / 6 / 15 / 8",
+      fontStyle: "normal",
+    },
+  },
+  "industryValue": {
+    label: {
+      ...styles.label,
+      gridArea: "11 / 10 / 13 / 12",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "13 / 10 / 15 / 12",
+      fontStyle: "normal",
+    },
+  },
+  "commerceValue": {
+    label: {
+      ...styles.label,
+      gridArea: "15 / 2 / 17 / 4",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "17 / 2 / 19 / 4",
+      fontStyle: "normal",
+    },
+  },
 };
