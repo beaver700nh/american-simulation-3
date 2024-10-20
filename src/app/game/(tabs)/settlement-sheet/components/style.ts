@@ -161,6 +161,39 @@ export const style: StyleType = {
       gridArea: "9 / 10 / 11 / 12",
     },
   },
+  "propertyCollection": {
+    label: {
+      ...styles.label,
+      gridArea: "19 / 2 / 21 / 4",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "21 / 2 / 23 / 4",
+      fontStyle: "normal",
+    },
+  },
+  "tariffCollection": {
+    label: {
+      ...styles.label,
+      gridArea: "19 / 6 / 21 / 8",
+      fontStyle: "italic",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "21 / 6 / 23 / 8",
+    },
+  },
+  "exciseCollection": {
+    label: {
+      ...styles.label,
+      gridArea: "15 / 6 / 17 / 8",
+      fontStyle: "italic",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "17 / 6 / 19 / 8",
+    },
+  },
   "plantationValue": {
     label: {
       ...styles.label,
@@ -203,6 +236,72 @@ export const style: StyleType = {
       ...styles.value,
       gridArea: "17 / 2 / 19 / 4",
       fontStyle: "normal",
+    },
+  },
+  "tradeFleet": {
+    label: {
+      ...styles.label,
+      gridArea: "15 / 10 / 17 / 12",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "17 / 10 / 19 / 12",
+      fontStyle: "normal",
+    },
+  },
+  "debt": {
+    label: {
+      ...styles.label,
+      gridArea: "19 / 10 / 21 / 12",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "21 / 10 / 23 / 12",
+      fontStyle: "normal",
+    },
+  },
+  "smuggling": {
+    label: {
+      ...styles.label,
+      gridArea: "23 / 2 / 25 / 4",
+      fontStyle: "italic",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "25 / 2 / 27 / 4",
+    },
+  },
+  "societyLevel": {
+    label: {
+      ...styles.label,
+      gridArea: "23 / 5 / 25 / 7",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "25 / 5 / 27 / 7",
+      fontStyle: "normal",
+    },
+  },
+  "dividend": {
+    label: {
+      ...styles.label,
+      gridArea: "23 / 8 / 25 / 9",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "25 / 8 / 27 / 9",
+      fontStyle: "normal",
+    },
+  },
+  "triangularTrade": {
+    label: {
+      ...styles.label,
+      gridArea: "23 / 10 / 25 / 12",
+      fontStyle: "italic",
+    },
+    value: {
+      ...styles.value,
+      gridArea: "25 / 10 / 27 / 12",
     },
   },
 };

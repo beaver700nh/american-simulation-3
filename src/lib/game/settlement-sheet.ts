@@ -55,6 +55,42 @@ export async function getSettlementSheet(_: unknown, where: { turn?: number } = 
           name: "commerceValue",
           label: "Commerce M/V",
         },
+        {
+          name: "propertyCollection",
+          label: "Tax Collection",
+        },
+        {
+          name: "tariffCollection",
+          label: "Tariff Collection",
+        },
+        {
+          name: "exciseCollection",
+          label: "Excise Collection",
+        },
+        {
+          name: "tradeFleet",
+          label: "Trade Fleet",
+        },
+        {
+          name: "debt",
+          label: "Debt",
+        },
+        {
+          name: "smuggling",
+          label: "Smuggling",
+        },
+        {
+          name: "societyLevel",
+          label: "Society Level",
+        },
+        {
+          name: "dividend",
+          label: "Dividend",
+        },
+        {
+          name: "triangularTrade",
+          label: "Triangular Trade",
+        },
       ],
     },
   ] satisfies SettlementSheet[];

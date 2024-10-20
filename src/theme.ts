@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import { ThemeOptions, createTheme } from "@mui/material/styles";
 
+// TODO font is duplicated
 const font = Inter({
   subsets: ["latin"],
   display: "swap",
