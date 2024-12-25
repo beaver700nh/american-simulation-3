@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import { Box } from "@mui/material";
 
@@ -8,13 +8,9 @@ import { TurnValues } from "@/lib/definitions";
 
 import { useTurn } from "@/app/contexts/turn-manager";
 import TurnSelect from "@/app/components/turn-select";
-import ViewingTurnProvider from "../components/turn-context";
+import Inner from "../components/inner";
 
-export default function Wrapper({
-  children,
-}: Readonly<{
-  children?: React.ReactNode;
-}>) {
+export default function Wrapper() {
   const maxIndex = (x => x == null ? null : TurnValues.indexOf(x))(useTurn());
 
   const indexState = useState<number | null>(null);
@@ -28,11 +24,13 @@ export default function Wrapper({
         indexState={indexState}
         maxIndex={maxIndex}
       />
-      <ViewingTurnProvider
-        turn={index == null ? null : TurnValues[index]}
+      <Suspense
+        fallback={<p>Loading</p>}
       >
-        {children}
-      </ViewingTurnProvider>
+        <Inner
+          turn={index == null ? null : TurnValues[index]}
+        />
+      </Suspense>
     </Box>
   );
 }
