@@ -8,9 +8,12 @@ import { TurnValues } from "@/lib/definitions";
 
 import { useTurn } from "@/app/contexts/turn-manager";
 import TurnSelect from "@/app/components/turn-select";
-import Inner from "../components/inner";
 
-export default function Wrapper() {
+export default function Wrapper({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const maxIndex = (x => x == null ? null : TurnValues.indexOf(x))(useTurn());
 
   const indexState = useState<number | null>(null);
@@ -27,9 +30,7 @@ export default function Wrapper() {
       <Suspense
         fallback={<p>Loading</p>}
       >
-        <Inner
-          turn={index == null ? null : TurnValues[index]}
-        />
+        {children}
       </Suspense>
     </Box>
   );

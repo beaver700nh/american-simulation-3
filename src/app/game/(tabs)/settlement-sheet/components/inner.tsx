@@ -27,7 +27,7 @@ export default function Inner({
       return;
     }
 
-    getSettlementSheet(null, { turn }).then(setSheet);
+    getSettlementSheet(null, turn).then(setSheet);
   }, [turn]);
 
   return (
