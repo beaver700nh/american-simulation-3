@@ -1,18 +1,34 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 import { Box, Paper } from "@mui/material";
 
-import { Turn } from "@/lib/definitions";
+import { SettlementSheet, SettlementSheetData } from "@/lib/definitions";
 import { getSettlementSheet } from "@/lib/game/settlement-sheet";
 
+import { Settlement } from "@prisma/client";
+
+import { useViewingTurn } from "../components/turn-context";
 import Cell from "../components/cell";
 
 type InnerProps = {
-  turn: Turn | null;
+  settlement: Settlement;
 };
 
-export default async function Inner({
-  turn,
+export default function Inner({
+  settlement,
 }: InnerProps) {
-  const sheet = turn === null ? null : await getSettlementSheet(null, turn);
+  const turn = useViewingTurn();
+  const [sheet, setSheet] = useState<SettlementSheet | null>(null);
+
+  useEffect(() => {
+    if (turn == null) {
+      return;
+    }
+
+    getSettlementSheet(null, { turn }).then(setSheet);
+  }, [turn]);
 
   return (
     <Box
@@ -34,7 +50,19 @@ export default async function Inner({
             gridTemplate: "repeat(50, 1fr) / repeat(11, 1fr)",
           }}
         >
-          {sheet?.data.map(Cell)}
+          {
+            ([
+              ...(sheet?.data ?? []),
+              {
+                "name": "settlement",
+                "value": settlement.name,
+              },
+              {
+                "name": "turn",
+                "label": "Year",
+              },
+            ] satisfies SettlementSheetData[]).map(Cell)
+          }
         </p>
       </Paper>
     </Box>
